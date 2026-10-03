@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071735">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="Confirme sua presença e informe seu nome completo.">
+  <title>Confirme sua presença</title>
+
+
+
+<base target="_top">
+<meta name="api-url" content="<?= apiUrl ?>">
+<style>
+:root {
+  color-scheme: dark;
+  --night: #071735;
+  --blue: #0B2454;
+  --mid-blue: #193D78;
+  --soft-blue: #7295C5;
+  --gold: #F5CC59;
+  --cream: #F5F3EC;
+  --muted: #c7d2e3;
+}
+
+* { box-sizing: border-box; }
+html { min-width: 320px; min-height: 100%; background: var(--night); }
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--cream);
+  background: radial-gradient(ellipse at 52% 20%, rgba(25,61,120,.36), transparent 47%), radial-gradient(ellipse at 5% 86%, rgba(11,36,84,.5), transparent 40%), linear-gradient(155deg, rgba(7,23,53,.72), rgba(11,36,84,.62) 55%, rgba(7,23,53,.8)), none;
+  background-size: auto, auto, auto, cover;
+  background-position: center, center, center, center 38%;
+  background-attachment: scroll;
+  font-family: Montserrat, sans-serif;
+}
+.page-shell { position: relative; z-index: 1; width: min(100% - 40px, 780px); min-height: 100vh; margin: 0 auto; padding: max(68px, 10vh) 0 30px; display: flex; flex-direction: column; }
+.intro, .family-heading { text-align: center; }
+.eyebrow { margin: 0; color: var(--gold); font-size: .68rem; font-weight: 600; letter-spacing: .24em; line-height: 1.6; text-transform: uppercase; }
+.ornament { display: flex; width: 92px; align-items: center; gap: 8px; margin: 18px auto; }
+.ornament span { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, rgba(245,204,89,.7)); }
+.ornament span:last-child { transform: scaleX(-1); }.ornament i { width: 5px; height: 5px; border: 1px solid var(--gold); transform: rotate(45deg); }
+h1, h2, .guest-name { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; }
+h1 { margin: 0; font-size: clamp(2.7rem, 8vw, 4.8rem); line-height: .98; letter-spacing: -.025em; }
+.intro-copy { max-width: 500px; margin: 18px auto 0; color: var(--muted); font-size: .86rem; line-height: 1.8; }
+.event-details { margin:14px 0 0; color:var(--gold); font-size:.72rem; letter-spacing:.09em; }
+.state-panel { min-height: 185px; margin: 45px 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; text-align: center; color: var(--cream); }
+.state-panel > p { margin: 0; font-size: .9rem; line-height: 1.8; }
+.state-panel[hidden], .guest-content[hidden] { display: none; }
+.loading-mark { display: flex; align-items: center; gap: 7px; height: 24px; }
+.loading-mark span { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); animation: drift 1.5s ease-in-out infinite; }
+.loading-mark span:nth-child(2) { animation-delay: .18s; }.loading-mark span:nth-child(3) { animation-delay: .36s; }
+@keyframes drift { 0%, 100% { transform: translateY(3px); opacity: .4; } 50% { transform: translateY(-4px); opacity: 1; } }
+.state-error { color: #f2dede; }.state-success { margin: 28px 0 8px; min-height: 145px; }
+.state-success .eyebrow { font-size: .74rem; }.state-success > p:not(.eyebrow) { color: var(--muted); }
+.text-button { border: 0; border-bottom: 1px solid rgba(245,204,89,.65); padding: 7px 2px; color: var(--gold); background: transparent; font: 600 .75rem Montserrat, sans-serif; cursor: pointer; }
+.guest-content { margin-top: 50px; }
+.guest-list { display: grid; gap: 16px; }
+.guest-row { box-sizing:border-box; width:100%; max-width:100%; min-width:0; margin:0; padding:22px 20px 24px; border:1px solid rgba(114,149,197,.36); border-radius:8px; background:rgba(5,19,45,.66); box-shadow:0 12px 28px rgba(0,0,0,.16); }
+.guest-name { display:block; box-sizing:border-box; width:100%; min-inline-size:0; max-width:100%; padding:0; color:var(--cream); font-size:clamp(1.7rem,5.8vw,2.25rem); line-height:1.08; white-space:normal!important; overflow-wrap:anywhere; word-break:break-word; }
+.guest-row > legend { box-sizing:border-box; width:100%; min-width:0; max-width:100%; white-space:normal; overflow-wrap:anywhere; }
+.guest-category { display:none!important; }
+.response-choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }.full-name-field { grid-column: 1 / -1; display: grid; gap: 8px; margin-top: 16px; color: var(--muted); font-size: .7rem; letter-spacing: .05em; text-align: left; }
+.full-name-field input { width: 100%; min-height: 50px; padding: 12px 14px; border: 1px solid rgba(114,149,197,.45); border-radius: 0; color: var(--cream); background: rgba(7,23,53,.56); font: 400 .9rem Montserrat, sans-serif; letter-spacing: normal; }
+.full-name-field input:focus { border-color: var(--gold); outline: 2px solid rgba(245,204,89,.24); outline-offset: 2px; }
+.full-name-hint { color: #91a6c4; font-size: .62rem; line-height: 1.6; letter-spacing: normal; }
+.choice { position: relative; display: flex; min-height: 50px; align-items: center; justify-content: center; padding: 10px 12px; border: 1px solid rgba(114,149,197,.45); color: #d8e1ef; text-align: center; cursor: pointer; transition: border-color .18s, color .18s, background .18s; }
+.choice:hover { border-color: rgba(245,204,89,.7); }
+.choice input { position: absolute; width: 1px; height: 1px; opacity: 0; }
+.choice span { font-size: .69rem; font-weight: 500; line-height: 1.45; }
+.choice:has(input:checked) { border-color: var(--gold); color: var(--gold); background: rgba(245,204,89,.07); }
+.choice:has(input:focus-visible) { outline: 2px solid var(--cream); outline-offset: 3px; }
+.form-footer { padding-top: 23px; text-align: center; }
+.form-note { min-height: 20px; margin: 0 0 14px; color: var(--muted); font-size: .7rem; line-height: 1.6; }.form-note-error { color: #ffd3c9; }
+.save-button { width: 100%; min-height: 56px; padding: 14px 22px; border: 1px solid var(--gold); color: var(--night); background: var(--gold); font: 700 .72rem Montserrat, sans-serif; letter-spacing: .15em; text-transform: uppercase; cursor: pointer; transition: background .18s, color .18s; }
+.save-button:hover { color: var(--gold); background: transparent; }.save-button:disabled { opacity: .72; cursor: wait; }
+.save-button.is-saving::before { display:inline-block; width:14px; height:14px; margin:0 10px -2px 0; border:2px solid rgba(7,23,53,.28); border-top-color:var(--night); border-radius:50%; content:""; animation:save-spinner .72s linear infinite; }
+@keyframes save-spinner { to { transform:rotate(360deg); } }
+.page-footer { margin-top: auto; padding-top: 55px; color: rgba(199,210,227,.56); text-align: center; font-size: .61rem; letter-spacing: .12em; }
+.landing { justify-content: center; }.landing .intro-copy { max-width: 410px; }
+@media (min-width: 680px) { .page-shell { width: min(100% - 64px, 660px); padding-top: 9vh; }.guest-content { margin-top: 35px; }.guest-row { display:grid; width:100%; max-width:100%; grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); align-items:center; column-gap:24px; row-gap:16px; }.guest-name { grid-column:1; }.guest-category { grid-column:1; margin-bottom:0; }.response-choices { min-width:0; grid-column:2; grid-row:1 / span 2; }.save-button { width:min(100%,360px); } }
+@media (max-width: 679px) { body { min-height:100vh; min-height:100svh; background-attachment:scroll; background-size:auto,auto,auto,100% auto; background-position:center,center,center,center top; background-repeat:no-repeat; }.page-shell { width:min(calc(100% - 32px),660px); min-height:100vh; min-height:100svh; padding:max(30px,5svh) 0 calc(24px + env(safe-area-inset-bottom)); }.intro-copy { margin-top:14px; font-size:.9rem; line-height:1.7; }.guest-content { margin-top:28px; }.guest-list { gap:13px; }.guest-row { padding:19px 15px 21px; border-radius:8px; }.guest-name { overflow-wrap:anywhere; }.response-choices { gap:8px; }.choice { min-height:56px; padding:11px 8px; }.choice span { font-size:.74rem; }.full-name-field { margin-top:14px; font-size:.74rem; }.full-name-field input { min-height:52px; font-size:1rem; }.full-name-hint { font-size:.68rem; }.form-footer { padding-top:18px; }.save-button { min-height:58px; padding:15px 16px; font-size:.72rem; }.page-footer { padding-top:38px; padding-bottom:env(safe-area-inset-bottom); line-height:1.6; } }
+@media (max-width:370px) { .page-shell { width:min(calc(100% - 24px),660px); }.guest-row { padding:17px 12px 19px; }.response-choices { grid-template-columns:1fr; }.choice { min-height:50px; } }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; transition-duration: .01ms !important; } }
+
+</style>
+</head>
+<body class="starry-background" data-token="<?= token ?>">
+  <main class="page-shell">
+    <header class="intro">
+      <h1>Confirme sua presença</h1>
+      <p class="intro-copy" id="intro-copy">Responda abaixo se você poderá comparecer e informe seu nome completo.</p>
+    </header>
+
+    <section id="state-panel" class="state-panel" aria-live="polite" aria-atomic="true">
+      <div class="loading-mark" aria-hidden="true"><span></span><span></span><span></span></div>
+      <p>Preparando sua noite...</p>
+    </section>
+
+    <section id="guest-content" class="guest-content" hidden>
+      <form id="rsvp-form">
+        <div id="guest-list" class="guest-list"></div>
+        <div class="form-footer">
+          <p id="form-note" class="form-note">Escolha uma resposta e informe o nome completo de cada pessoa antes de salvar.</p>
+          <button id="save-button" class="save-button" type="submit">Salvar confirmação</button>
+        </div>
+      </form>
+    </section>
+
+    <footer class="page-footer"><span>Com carinho, esperamos celebrar com você</span></footer>
+  </main>
+<script>
+"use strict";
+
+(() => {
+  const API_BASE_URL = document.querySelector('meta[name="api-url"]')?.content || "https://script.google.com/macros/s/AKfycbye0yw0ca2pORfpLLtNQjS63mqDrixLEGMwLSZ8ueZP83AmCaSo3TpP-Ykv-2R0FdFkCA/exec";
+
+  async function callApi(payload) {
+    if (window.google && window.google.script && window.google.script.run) {
+      return new Promise((resolve, reject) => {
+        window.google.script.run
+          .withSuccessHandler(resolve)
+          .withFailureHandler((error) => reject(new Error(error && error.message ? error.message : "Falha ao falar com o servidor.")))
+          .processPublicRequest(payload);
+      });
+    }
+    const response = await fetch(API_BASE_URL, {
+      method: "POST",
+      mode: "cors",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify(payload)
+    });
+    let data;
+    try { data = await response.json(); } catch (_) { throw new Error("Resposta inválida do servidor."); }
+    if (!response.ok || !data || data.ok !== true) {
+      const error = new Error(data && data.message ? data.message : `Erro HTTP ${response.status}`);
+      error.status = response.status; error.data = data;
+      throw error;
+    }
+    return data;
+  }
+
+  function getGroup(token) {
+    return callApi({ action: "getGroup", token });
+  }
+
+  function saveResponses(token, respostas) {
+    return callApi({ action: "saveResponses", grupoId: token, respostas });
+  }
+
+  const params = new URLSearchParams(window.location.search);
+  const token = document.body.dataset.token || params.get("token");
+  const statePanel = document.getElementById("state-panel");
+  const guestContent = document.getElementById("guest-content");
+  const guestList = document.getElementById("guest-list");
+  const form = document.getElementById("rsvp-form");
+  const saveButton = document.getElementById("save-button");
+  const formNote = document.getElementById("form-note");
+  let guests = [];
+  let savedAnswers = [];
+  let submissionInProgress = false;
+
+  function showState(message, type = "info", actionLabel = "", action = null) {
+    statePanel.replaceChildren();
+    statePanel.className = `state-panel state-${type}`;
+    const paragraph = document.createElement("p");
+    paragraph.textContent = message;
+    statePanel.append(paragraph);
+    if (actionLabel && action) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "text-button";
+      button.textContent = actionLabel;
+      button.addEventListener("click", action);
+      statePanel.append(button);
+    }
+    statePanel.hidden = false;
+    guestContent.hidden = true;
+  }
+
+  function responseValue(guest) {
+    const value = String(guest.status || "").trim();
+    return value === "Confirmado" || value === "Não irá" ? value : "Pendente";
+  }
+
+  function render(data) {
+    guests = Array.isArray(data.convidados) ? data.convidados : [];
+    guestList.replaceChildren();
+
+    if (!guests.length) {
+      showState("Não há convidados nesta lista.", "info");
+      return;
+    }
+
+    guests.forEach((guest, index) => {
+      const row = document.createElement("fieldset");
+      row.className = "guest-row";
+      row.setAttribute("aria-label", guest.nome || "Convidado");
+      row.style.boxSizing = "border-box";
+      row.style.width = "100%";
+      row.style.maxWidth = "100%";
+      row.style.minWidth = "0";
+      const guestName = document.createElement("div");
+      guestName.className = "guest-name";
+      guestName.textContent = guest.nome || "";
+      guestName.style.boxSizing = "border-box";
+      guestName.style.display = "block";
+      guestName.style.width = "100%";
+      guestName.style.maxWidth = "100%";
+      guestName.style.minWidth = "0";
+      guestName.style.whiteSpace = "normal";
+      guestName.style.overflowWrap = "anywhere";
+      guestName.style.wordBreak = "break-word";
+      row.append(guestName);
+
+      const choices = document.createElement("div");
+      choices.className = "response-choices";
+      const current = responseValue(guest);
+      ["Confirmado", "Não irá"].forEach((value, choiceIndex) => {
+        const label = document.createElement("label");
+        label.className = "choice";
+        const input = document.createElement("input");
+        input.type = "radio";
+        input.name = `guest-${index}`;
+        input.value = value;
+        input.checked = current === value;
+        input.dataset.guestId = guest.id || "";
+        input.setAttribute("aria-label", `${guest.nome || "Convidado"}: ${value === "Confirmado" ? "Vou estar presente" : "Não poderei comparecer"}`);
+        const text = document.createElement("span");
+        text.textContent = value === "Confirmado" ? "Vou estar presente" : "Não poderei comparecer";
+        label.append(input, text);
+        choices.append(label);
+      });
+      row.append(choices);
+
+      const fullNameField = document.createElement("label");
+      fullNameField.className = "full-name-field";
+      const fullNameLabel = document.createElement("span");
+      fullNameLabel.textContent = "Seu nome completo";
+      const fullNameInput = document.createElement("input");
+      fullNameInput.type = "text";
+      fullNameInput.name = `full-name-${index}`;
+      // This is a separate guest-provided field; never derive it from guest.nome (the admin's registered name).
+      fullNameInput.value = String(guest.nomeCompleto || "");
+      fullNameInput.placeholder = "Digite seu nome completo";
+      fullNameInput.autocomplete = "off";
+      fullNameInput.maxLength = 120;
+      fullNameInput.required = true;
+      fullNameInput.dataset.guestId = guest.id || "";
+      fullNameInput.setAttribute("aria-label", `Nome completo de ${guest.nome || "convidado"}`);
+      fullNameField.append(fullNameLabel, fullNameInput);
+      row.append(fullNameField);
+      guestList.append(row);
+    });
+
+    savedAnswers = readAnswers();
+    updateSaveAvailability();
+
+    statePanel.hidden = true;
+    guestContent.hidden = false;
+  }
+
+  function readAnswers() {
+    return guests.map((guest, index) => {
+      const selected = form.querySelector(`input[name="guest-${index}"]:checked`);
+      const fullNameInput = form.querySelector(`input[name="full-name-${index}"]`);
+      return {
+        convidadoId: guest.id,
+        resposta: selected ? selected.value : "Pendente",
+        nomeCompleto: fullNameInput ? fullNameInput.value.trim() : ""
+      };
+    });
+  }
+
+  function updateSaveAvailability() {
+    const current = readAnswers();
+    const allAnswered = current.every((item) => (item.resposta === "Confirmado" || item.resposta === "Não irá") && item.nomeCompleto);
+    const changed = current.some((item, index) => item.resposta !== (savedAnswers[index] && savedAnswers[index].resposta) || item.nomeCompleto !== (savedAnswers[index] && savedAnswers[index].nomeCompleto));
+    saveButton.disabled = !allAnswered || !changed;
+    if (!allAnswered) {
+      formNote.textContent = "Escolha uma resposta e informe o nome completo de cada pessoa.";
+    } else if (!changed) {
+      formNote.textContent = "Suas respostas estão atualizadas.";
+    } else {
+      formNote.textContent = "Há alterações prontas para salvar.";
+    }
+    formNote.classList.remove("form-note-error");
+  }
+
+  form.addEventListener("change", updateSaveAvailability);
+  form.addEventListener("input", updateSaveAvailability);
+
+  function isInvalidToken(error) {
+    const message = `${error.message || ""} ${JSON.stringify(error.data || {})}`.toLowerCase();
+    return error.status === 404 || /token|grupo|inv[aá]lid|n[aã]o encontrado|not found/.test(message);
+  }
+
+  async function loadGroup() {
+    showState("Preparando sua noite...", "loading");
+    const mark = document.createElement("div");
+    mark.className = "loading-mark";
+    mark.setAttribute("aria-hidden", "true");
+    mark.innerHTML = "<span></span><span></span><span></span>";
+    statePanel.prepend(mark);
+    try {
+      const data = await getGroup(token);
+      render(data);
+    } catch (error) {
+      console.error("Falha ao carregar grupo:", error);
+      if (isInvalidToken(error)) {
+        showState("Não conseguimos encontrar esta lista de convidados.", "error", "Tentar novamente", loadGroup);
+      } else {
+        showState("Não foi possível carregar sua lista no momento. Tente novamente em alguns instantes.", "error", "Tentar novamente", loadGroup);
+      }
+    }
+  }
+
+  function showSuccess() {
+    statePanel.replaceChildren();
+    statePanel.className = "state-panel state-success";
+    const eyebrow = document.createElement("p");
+    eyebrow.className = "eyebrow";
+    eyebrow.textContent = "Confirmação registrada";
+    const detail = document.createElement("p");
+    detail.textContent = "Obrigado por responder. Que sua presença ilumine esta celebração como as estrelas nas pinturas de Vincent van Gogh.";
+    statePanel.append(eyebrow, detail);
+    statePanel.hidden = false;
+    guestContent.hidden = true;
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    if (submissionInProgress) return;
+    const currentAnswers = readAnswers();
+    const responses = currentAnswers.filter((item) => item.resposta === "Confirmado" || item.resposta === "Não irá");
+    if (responses.length !== guests.length || !responses.every((item) => item.convidadoId && item.nomeCompleto)) {
+      formNote.textContent = "Escolha uma resposta e informe o nome completo de cada pessoa.";
+      formNote.classList.add("form-note-error");
+      return;
+    }
+    if (!responses.some((item, index) => item.resposta !== (savedAnswers[index] && savedAnswers[index].resposta) || item.nomeCompleto !== (savedAnswers[index] && savedAnswers[index].nomeCompleto))) return;
+    submissionInProgress = true;
+    saveButton.disabled = true;
+    saveButton.classList.add("is-saving");
+    saveButton.setAttribute("aria-busy", "true");
+    saveButton.textContent = "Salvando...";
+    formNote.textContent = "";
+    formNote.classList.remove("form-note-error");
+    let saveFailed = false;
+    let saveErrorMessage = "";
+    try {
+      const result = await saveResponses(token, responses);
+      if (Array.isArray(result.convidados)) {
+        const returnedById = new Map(result.convidados.map((guest) => [guest.id, guest]));
+        guests = guests.map((guest) => ({ ...guest, ...returnedById.get(guest.id) }));
+      } else {
+        guests = guests.map((guest) => {
+          const response = responses.find((item) => item.convidadoId === guest.id);
+          return response ? { ...guest, status: response.resposta, nomeCompleto: response.nomeCompleto } : guest;
+        });
+      }
+      savedAnswers = readAnswers();
+      showSuccess();
+    } catch (error) {
+      console.error("Falha ao salvar respostas:", error);
+      saveFailed = true;
+      saveErrorMessage = error.message || "Tente novamente.";
+    } finally {
+      submissionInProgress = false;
+      saveButton.classList.remove("is-saving");
+      saveButton.removeAttribute("aria-busy");
+      saveButton.textContent = "Salvar confirmação";
+      updateSaveAvailability();
+      if (saveFailed) {
+        formNote.textContent = "Não foi possível registrar sua resposta. " + saveErrorMessage;
+        formNote.classList.add("form-note-error");
+      }
+    }
+  });
+
+  if (!token || !token.trim()) {
+    showState("Este link de confirmação está incompleto.", "error");
+  } else {
+    loadGroup();
+  }
+})();
+
+
+
+
+</script>
+</body>
+</html>
