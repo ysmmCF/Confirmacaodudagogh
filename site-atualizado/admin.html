@@ -103,7 +103,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
 }
 @media (max-width:370px) { .account-label { max-width:none; }.topbar .quiet-button { font-size:.56rem; padding:0 8px; }.metric { padding:10px; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; } }
-
   </style>
   <script defer>
 (() => {
@@ -120,7 +119,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   const rememberEmail = (email) => { try { localStorage.setItem("admin_email", email); } catch (_) { notice("O navegador bloqueou o armazenamento local. O painel ainda pode ser acessado, mas talvez seja necessário informar o e-mail na próxima abertura.", true); } };
   const html = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const truthy = (v) => v === true || ["true", "sim", "ativo", "1"].includes(String(v).trim().toLowerCase());
-
   async function request(payload) {
     const res = await fetch(API_BASE_URL, { method: "POST", mode: "cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
     if (!res.ok) throw new Error(`Erro HTTP ${res.status}`);
@@ -436,7 +434,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     $("mobile-scrim").addEventListener("click", () => { $("sidebar").classList.remove("open"); $("mobile-scrim").hidden = true; });
   });
 })();
-
   </script>
 </head>
 <body>
@@ -451,7 +448,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       </nav>
       <div class="sidebar-bottom"><span class="private-label"><i></i> Acesso protegido pela API</span><p>As alterações são salvas no Google Sheets.</p></div>
     </aside>
-
     <main class="main-area" id="overview">
       <header class="topbar">
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
@@ -459,15 +455,12 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
         <span class="account-label" id="account-label">Verificando acesso…</span>
         <button class="quiet-button" id="refresh-button" type="button" hidden>Atualizar dados</button>
       </header>
-
       <div class="content-wrap">
         <section class="page-heading">
           <div><p class="eyebrow">Área administrativa</p><h1>Visão geral</h1><p class="heading-copy" id="event-summary">Acompanhe as confirmações e organize seus convidados.</p></div>
           <button class="primary-button" id="new-group-button" type="button" hidden><span aria-hidden="true">＋</span> Criar família</button>
         </section>
-
         <section class="notice" id="notice" role="status" aria-live="polite" hidden></section>
-
         <section class="access-panel" id="access-panel" aria-labelledby="access-title">
           <span class="access-symbol" aria-hidden="true">✦</span>
           <p class="eyebrow">Acesso administrativo</p>
@@ -479,7 +472,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
             <button class="primary-button" id="login-button" type="submit">Acessar painel</button>
           </form>
         </section>
-
         <div id="admin-content" hidden>
           <section class="metrics" aria-label="Estatísticas dos convidados">
             <article class="metric"><span class="metric-label">GRUPOS</span><strong id="stat-groups">0</strong><span class="metric-foot">Famílias cadastradas</span></article>
@@ -489,11 +481,9 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
             <article class="metric"><span class="metric-label">PENDENTES</span><strong id="stat-pending">0</strong><span class="metric-foot">Aguardando resposta</span></article>
             <article class="metric"><span class="metric-label">NÃO IRÃO</span><strong id="stat-declined">0</strong><span class="metric-foot">Respostas recebidas</span></article>
           </section>
-
           <section class="extra-stats" aria-label="Detalhes de convidados">
             <span><b id="stat-adults">0</b> adultos</span><span><b id="stat-children">0</b> crianças</span><span><b id="stat-men">0</b> homens</span><span><b id="stat-women">0</b> mulheres</span><span><b id="stat-drinks">0</b> com bebida</span>
           </section>
-
           <section class="groups-section" id="groups">
             <div class="section-heading"><div><p class="eyebrow">Lista de convidados</p><h2>Famílias e grupos</h2></div><label class="search-box"><span class="sr-only">Buscar família ou convidado</span><input id="search-input" type="search" placeholder="Buscar família" autocomplete="off"></label></div>
             <div id="groups-list" class="groups-list"></div>
@@ -509,7 +499,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     </main>
   </div>
   <div class="mobile-scrim" id="mobile-scrim" hidden></div>
-
   <dialog class="modal" id="invite-dialog" aria-labelledby="invite-dialog-title">
     <div class="modal-form">
       <button class="modal-close" type="button" data-close="invite-dialog" aria-label="Fechar">×</button>
@@ -520,7 +509,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="invite-dialog">Fechar</button><a class="quiet-button" id="invite-open-link" href="#" target="_blank" rel="noopener noreferrer">Abrir prévia</a><button class="primary-button" id="invite-copy-button" type="button">Copiar link</button></div>
     </div>
   </dialog>
-
   <dialog class="modal" id="confirmed-dialog" aria-labelledby="confirmed-dialog-title">
     <div class="modal-form">
       <button class="modal-close" type="button" data-close="confirmed-dialog" aria-label="Fechar">×</button>
@@ -530,7 +518,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="confirmed-dialog">Fechar</button></div>
     </div>
   </dialog>
-
   <dialog class="modal" id="group-dialog" aria-labelledby="group-dialog-title">
     <form id="group-form" class="modal-form">
       <button class="modal-close" type="button" data-close="group-dialog" aria-label="Fechar">×</button>
@@ -540,7 +527,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="group-dialog">Cancelar</button><button class="primary-button" type="submit">Criar família</button></div>
     </form>
   </dialog>
-
   <dialog class="modal" id="guest-dialog" aria-labelledby="guest-dialog-title">
     <form id="guest-form" class="modal-form">
       <button class="modal-close" type="button" data-close="guest-dialog" aria-label="Fechar">×</button>
@@ -561,6 +547,3 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   </dialog>
 </body>
 </html>
-
-
-
