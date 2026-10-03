@@ -50,6 +50,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
 .login-form input::placeholder { color:#8295b2; }
 .login-form button { width:100%; min-height:48px; margin-top:5px; }
 .metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:13px; margin:20px 0 12px; }
+.metrics { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:13px; margin:20px 0 12px; }
 .metric { min-height:126px; display:flex; flex-direction:column; justify-content:center; gap:8px; padding:18px; border:1px solid var(--line); background:linear-gradient(145deg,rgba(25,61,120,.24),rgba(7,23,53,.4)); }
 .metric-label { color:#94a8c4; font-size:.55rem; font-weight:700; letter-spacing:.14em; }.metric strong { color:var(--cream); font:500 2rem/1 "Cormorant Garamond",Georgia,serif; }.metric-foot { color:#768aa9; font-size:.56rem; }
 .extra-stats { display:flex; flex-wrap:wrap; gap:10px 24px; margin:0 0 44px; padding:15px 17px; border:1px solid var(--line); color:#a9bad1; font-size:.62rem; }.extra-stats b { color:var(--gold); font-weight:600; }
@@ -72,6 +73,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
 .status-badge { flex:0 0 auto; padding:5px 8px; border:1px solid rgba(114,149,197,.32); color:#b5c7df; font-size:.52rem; letter-spacing:.08em; text-transform:uppercase; }.status-badge.inactive { border-color:rgba(230,145,133,.38); color:#e4a99f; }
 .group-actions { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:7px; }.small-button { min-height:34px; padding:0 10px; font-size:.58rem; }
 .group-meta { display:flex; min-width:0; flex-wrap:wrap; gap:8px 22px; padding:12px 19px; color:#9eafc8; font-size:.6rem; }.group-meta b { color:#e4e9f1; font-weight:500; }
+.metric-link-button { align-self:flex-start; padding:0; border:0; border-bottom:1px solid rgba(245,204,89,.55); color:var(--gold); background:none; font-size:.57rem; cursor:pointer; }.metric-link-button:hover { color:var(--cream); }
 .invite-link-row { display:flex; gap:7px; padding:0 19px 14px; }.invite-link { min-width:0; flex:1; padding:10px; overflow:hidden; border:1px solid rgba(114,149,197,.18); color:#acbdd5; background:rgba(7,23,53,.62); font: .57rem ui-monospace,Consolas,monospace; text-overflow:ellipsis; white-space:nowrap; }
 .guest-details { min-width:0; margin:0 19px 14px; border:1px solid var(--line); background:rgba(7,23,53,.22); }
 .guest-details-summary { display:flex; min-height:44px; align-items:center; justify-content:space-between; padding:0 13px; color:#d8e1ef; font-size:.62rem; font-weight:600; list-style:none; cursor:pointer; }
@@ -81,6 +83,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
 .modal { width:min(100% - 28px,520px); max-height:min(90vh,780px); padding:0; border:1px solid rgba(114,149,197,.42); color:var(--cream); background:#091b3d; box-shadow:0 25px 90px rgba(0,0,0,.5); }.modal::backdrop { background:rgba(1,8,22,.78); backdrop-filter:blur(4px); }
 .modal-form { position:relative; display:grid; gap:15px; padding:30px; }.modal-form h2 { margin-top:-7px; font-size:2.15rem; }.modal-close { position:absolute; top:13px; right:15px; width:38px; height:38px; border:0; color:#c0cde0; background:transparent; font-size:1.7rem; cursor:pointer; }
 .modal-form label { display:grid; gap:7px; color:#b9c7db; font-size:.62rem; }.modal-form input,.modal-form select { width:100%; min-height:44px; padding:0 11px; border:1px solid var(--line); border-radius:0; color:var(--cream); background:#071735; font-size:.68rem; }.modal-form input::placeholder { color:#7589a7; }.modal-form select option { background:#071735; }
+.invite-preview-value { overflow-wrap:anywhere; word-break:break-word; font: .72rem/1.6 ui-monospace,Consolas,monospace!important; }.confirmed-list { display:grid; max-height:min(48vh,380px); gap:9px; margin:0; padding:0; overflow:auto; list-style:none; }.confirmed-list li { display:grid; gap:3px; padding:11px 13px; border:1px solid var(--line); background:rgba(7,23,53,.42); }.confirmed-list strong { color:var(--cream); font-size:.73rem; font-weight:600; overflow-wrap:anywhere; }.confirmed-list span { color:#91a6c4; font-size:.59rem; }
 .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }.modal-error { min-height:15px; margin:0; color:#ffc7bb; font-size:.62rem; line-height:1.55; }.modal-actions { display:flex; justify-content:flex-end; gap:9px; padding-top:4px; }
 .reported-name-field small { color:#8498b5; font-size:.57rem; line-height:1.5; }
 .mobile-scrim { display:none; }.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
@@ -94,26 +97,28 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
  .extra-stats { gap:9px 15px; margin-bottom:34px; padding:13px; font-size:.57rem; }.section-heading { align-items:stretch; flex-direction:column; }.search-box input { width:100%; min-height:45px; }
  .full-names-section { margin-top:44px; }.full-name-group { padding:15px; }.full-name-group-title { font-size:1.18rem; }.full-name-group-list li { font-size:.76rem; }
  .group-header { align-items:flex-start; flex-direction:column; padding:15px; }.group-title { width:100%; }.group-actions { width:100%; justify-content:stretch; }.group-actions button { flex:1; min-height:42px; }.group-meta { padding:11px 15px; }.invite-link-row { padding:0 15px 13px; }.guest-details { margin:0 15px 13px; }.guest-table-wrap { overflow-x:clip; }.guest-table,.guest-table tbody { display:block; width:100%; }.guest-table thead { display:none; }.guest-table tbody { display:grid; gap:8px; padding:10px; }.guest-table tbody tr { display:grid; min-width:0; overflow:hidden; border:1px solid rgba(114,149,197,.22); border-radius:6px; background:rgba(7,23,53,.38); }.guest-table td { display:grid; grid-template-columns:minmax(72px,32%) minmax(0,1fr); align-items:start; gap:8px; min-width:0; padding:10px 8px; border-bottom:1px solid rgba(114,149,197,.11); font-size:.65rem; line-height:1.5; overflow-wrap:anywhere; }.guest-table td::before { color:#8298b7; content:attr(data-label); font-size:.5rem; font-weight:700; letter-spacing:.04em; line-height:1.5; }.guest-table td[colspan] { display:block; text-align:center; }.guest-table td[colspan]::before { content:none; }.guest-table .guest-actions-cell { display:block; }.guest-table .guest-actions-cell button { width:100%; min-height:44px; }.guest-table .guest-actions-cell::before { display:block; margin-bottom:8px; }
+ .group-header { align-items:flex-start; flex-direction:column; padding:15px; }.group-title { width:100%; }.group-actions { width:100%; justify-content:stretch; }.group-actions button { flex:1; min-height:42px; }.group-meta { padding:11px 15px; }.invite-preview { margin:0 15px 13px; }.invite-link-row { padding:0 15px 13px; }.guest-details { margin:0 15px 13px; }.guest-table-wrap { overflow-x:clip; }.guest-table,.guest-table tbody { display:block; width:100%; }.guest-table thead { display:none; }.guest-table tbody { display:grid; gap:8px; padding:10px; }.guest-table tbody tr { display:grid; min-width:0; overflow:hidden; border:1px solid rgba(114,149,197,.22); border-radius:6px; background:rgba(7,23,53,.38); }.guest-table td { display:grid; grid-template-columns:minmax(72px,32%) minmax(0,1fr); align-items:start; gap:8px; min-width:0; padding:10px 8px; border-bottom:1px solid rgba(114,149,197,.11); font-size:.65rem; line-height:1.5; overflow-wrap:anywhere; }.guest-table td::before { color:#8298b7; content:attr(data-label); font-size:.5rem; font-weight:700; letter-spacing:.04em; line-height:1.5; }.guest-table td[colspan] { display:block; text-align:center; }.guest-table td[colspan]::before { content:none; }.guest-table .guest-actions-cell { display:block; }.guest-table .guest-actions-cell button { width:100%; min-height:44px; }.guest-table .guest-actions-cell::before { display:block; margin-bottom:8px; }
  .modal-form { gap:13px; padding:25px 19px 20px; }.form-grid { gap:11px; }.modal-actions > * { flex:1; }
  .mobile-scrim:not([hidden]) { position:fixed; inset:0; z-index:4; display:block; background:rgba(1,8,22,.66); }
 }
 @media (max-width:370px) { .account-label { max-width:none; }.topbar .quiet-button { font-size:.56rem; padding:0 8px; }.metric { padding:10px; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; } }
-
   </style>
   <script defer>
 (() => {
-  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbx9i55ldw-sSx16ifP2jdu0ULdvuiCe4UnDSZ_N5YR6dJLTocpGihGs7wpSdTH5dA4OsQ/exec";
+  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbye0yw0ca2pORfpLLtNQjS63mqDrixLEGMwLSZ8ueZP83AmCaSo3TpP-Ykv-2R0FdFkCA/exec";
   const SITE_BASE_URL = "https://ysmmcf.github.io/Confirmacaodudagogh/";
   const state = { email: "", groups: [], guests: [], responses: [], busy: false };
+  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbydTZCQBrUqSS1KJTLULSaRDa_qMm3ujrR1uJTRtztyB6dD5O8684ghrc4G0tEHiR0Hww/exec";
+  const state = { email: "", groups: [], guests: [], responses: [], responsesLoaded: false, responseLoadError: false, busy: false };
   const $ = (id) => document.getElementById(id);
   let noticeTimer = null;
+  let responseLoadSequence = 0;
   const setSelect = (select, value) => { const target = String(value ?? "").trim().toLocaleLowerCase("pt-BR"); const option = Array.from(select.options).find(item => item.value.trim().toLocaleLowerCase("pt-BR") === target); select.value = option ? option.value : ""; };
   const rememberedEmail = () => { try { return localStorage.getItem("admin_email") || ""; } catch (_) { return ""; } };
   const rememberEmail = (email) => { try { localStorage.setItem("admin_email", email); } catch (_) { notice("O navegador bloqueou o armazenamento local. O painel ainda pode ser acessado, mas talvez seja necessário informar o e-mail na próxima abertura.", true); } };
   const html = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const truthy = (v) => v === true || ["true", "sim", "ativo", "1"].includes(String(v).trim().toLowerCase());
-
   async function request(payload) {
     const res = await fetch(API_BASE_URL, { method: "POST", mode: "cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
     if (!res.ok) throw new Error(`Erro HTTP ${res.status}`);
@@ -136,18 +141,73 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   function showDashboard() { $("access-panel").hidden = true; $("admin-content").hidden = false; $("new-group-button").hidden = false; $("refresh-button").hidden = false; $("account-label").textContent = state.email; }
   async function copyInviteLink(groupId) {
     const invite = new URL("confirmar.html", SITE_BASE_URL);
+  function buildInviteUrl(groupId) {
+    const invite = new URL("confirmar.html", window.location.href);
+    invite.search = "";
     invite.searchParams.set("token", groupId);
+    return invite;
+  }
+  function showInvitePreview(groupId, familyName) {
+    const invite = buildInviteUrl(groupId);
+    $("invite-family-name").textContent = familyName || "Família";
+    $("invite-url").value = invite.href;
+    $("invite-open-link").href = invite.href;
+    $("invite-copy-status").textContent = "";
+    $("invite-dialog").showModal();
+  }
+  async function copyInviteLink() {
+    const inviteUrl = $("invite-url").value;
     try {
       await navigator.clipboard.writeText(invite.href);
+      await navigator.clipboard.writeText(inviteUrl);
     } catch (_) {
       const input = document.createElement("textarea"); input.value = invite.href; input.style.position = "fixed"; input.style.opacity = "0";
+      const input = document.createElement("textarea"); input.value = inviteUrl; input.style.position = "fixed"; input.style.opacity = "0";
       document.body.appendChild(input); input.select();
       const copied = document.execCommand("copy"); input.remove();
       if (!copied) { notice(`Copie o link: ${invite.href}`, true); return; }
+      if (!copied) { $("invite-copy-status").textContent = "Não foi possível copiar automaticamente. Selecione e copie o link acima."; return; }
     }
+    $("invite-copy-status").textContent = "Link copiado. Você já pode enviá-lo ao convidado.";
     notice("Link copiado para a área de transferência. Você já pode enviá-lo ao convidado.", false, true);
+    notice("Link copiado para a área de transferência.", false, true);
+  }
+  function showConfirmedGuests() {
+    const list = $("confirmed-names-list");
+    list.replaceChildren();
+    const latest = new Map();
+    state.responses.forEach(response => {
+      const guestId = String(response.convidadoid ?? response.convidadoId ?? response.idconvidado ?? "");
+      if (guestId) latest.set(guestId, response);
+    });
+    const guestById = new Map(state.guests.map(guest => [String(guest.id ?? guest.convidadoid ?? guest.idconvidado ?? ""), guest]));
+    const groupById = new Map(state.groups.map(group => [String(group.id ?? group.grupoId ?? group.grupoid ?? ""), group]));
+    const confirmed = [];
+    latest.forEach((response, guestId) => {
+      const values = [response.resposta, response.presenca, response.confirmado, response.status];
+      const didConfirm = values.some(value => value === true || ["sim", "true", "confirmado", "confirmed"].includes(String(value ?? "").trim().toLowerCase()));
+      if (!didConfirm) return;
+      const guest = guestById.get(guestId) || {};
+      const fullName = String(response.nomecompleto ?? response.nomecompletoinformado ?? response.nomeCompleto ?? response.nome ?? guest.nome ?? guest.name ?? "Convidado sem nome").trim();
+      const groupId = String(response.grupoid ?? response.grupoId ?? response.idgrupo ?? guest.grupoId ?? guest.grupoid ?? "");
+      confirmed.push({ fullName, family: groupById.get(groupId)?.nome || "Família" });
+    });
+    confirmed.sort((a, b) => a.fullName.localeCompare(b.fullName, "pt-BR", { sensitivity: "base" }));
+    $("confirmed-count-label").textContent = `${confirmed.length} ${confirmed.length === 1 ? "presença confirmada" : "presenças confirmadas"}`;
+    if (!confirmed.length) {
+      const empty = document.createElement("li");
+      empty.textContent = state.responsesLoaded ? "Ainda não há confirmações de presença." : "As confirmações ainda estão carregando.";
+      list.append(empty);
+    } else confirmed.forEach(person => {
+      const item = document.createElement("li");
+      const name = document.createElement("strong"); name.textContent = person.fullName;
+      const family = document.createElement("span"); family.textContent = person.family;
+      item.append(name, family); list.append(item);
+    });
+    $("confirmed-dialog").showModal();
   }
   async function loadData(preserveNotice = false) {
+    const responseRequest = ++responseLoadSequence;
     loading(true); if (!preserveNotice) notice("");
     try {
       const data = await api("adminData");
@@ -158,8 +218,24 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       // Algumas versões da API devolvem a lista direta vazia e mantêm os convidados dentro de cada grupo.
       state.guests = directGuests.length ? directGuests : nestedGuests;
       state.responses = data.respostas || data.responses || [];
+      state.responsesLoaded = Array.isArray(data.respostas || data.responses) && (data.respostas || data.responses).length > 0;
+      state.responseLoadError = false;
       render(); showDashboard();
       if ($("last-updated")) $("last-updated").textContent = new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date());
+      // Mostra grupos e convidados primeiro; respostas e nomes completos carregam em segundo plano.
+      api("adminResponses").then(result => {
+        if (responseRequest !== responseLoadSequence) return;
+        if (!result || result.ok !== true) throw new Error(result?.message || "Não foi possível carregar as respostas.");
+        state.responses = result.respostas || result.responses || [];
+        state.responsesLoaded = true;
+        render();
+      }).catch(error => {
+        if (responseRequest !== responseLoadSequence) return;
+        state.responseLoadError = true;
+        render();
+        notice("O painel abriu, mas as confirmações ainda não carregaram. Atualize o Code.gs e implante o Apps Script para habilitar a carga rápida.", true);
+        console.warn("Respostas ainda não carregadas:", error);
+      });
       return true;
     } catch (err) { if (!preserveNotice) notice(err.message || "Não foi possível carregar os dados. Verifique a conexão com a API.", true); return false; }
     finally { loading(false); }
@@ -169,6 +245,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     const declined = state.responses.filter(r => ["nao", "não", "false", "não irá", "nao ira"].includes(String(r.presenca ?? r.resposta ?? r.confirmado).trim().toLowerCase())).length;
     const total = state.guests.length;
     [["stat-total", total], ["stat-confirmed", confirmed], ["stat-pending", Math.max(0, total - confirmed - declined)], ["stat-declined", declined],
+    [["stat-groups", state.groups.length], ["stat-total", total], ["stat-confirmed", state.responsesLoaded ? confirmed : "…"], ["stat-pending", state.responsesLoaded ? Math.max(0, total - confirmed - declined) : "…"], ["stat-declined", state.responsesLoaded ? declined : "…"],
       ["stat-adults", state.guests.filter(g => String(g.categoria || "").toLowerCase().includes("adult")).length],
       ["stat-children", state.guests.filter(g => String(g.categoria || "").toLowerCase().includes("crian")).length],
       ["stat-men", state.guests.filter(g => String(g.genero || "").toLowerCase().includes("mascul")).length],
@@ -180,6 +257,11 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   function renderFullNames() {
     const list = $("full-names-list"), count = $("full-names-count");
     if (!list || !count) return;
+    if (!state.responsesLoaded) {
+      count.textContent = state.responseLoadError ? "Respostas indisponíveis" : "Carregando respostas…";
+      list.innerHTML = `<div class="empty-state">${state.responseLoadError ? "Não foi possível carregar os nomes completos. Atualize o painel." : "Carregando confirmações e nomes completos…"}</div>`;
+      return;
+    }
     const query = ($("full-name-search")?.value || "").trim().toLocaleLowerCase("pt-BR");
     const guestById = new Map(state.guests.map(g => [String(g.id ?? g.convidadoid ?? g.idconvidado ?? ""), g]));
     const groupById = new Map(state.groups.map(g => [String(g.id ?? g.grupoId ?? g.grupoid ?? ""), g]));
@@ -229,6 +311,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     list.innerHTML = groups.map(g => {
       const id = String(g.id ?? g.grupoId ?? ""), active = truthy(g.ativo ?? g.active);
       const guests = guestsByGroup.get(id) || [];
+      const inviteUrl = buildInviteUrl(id);
       const rawName = String(g.nome || "").trim();
       const groupName = !rawName || rawName.toLocaleLowerCase("pt-BR") === "a definir" ? "Família sem nome" : rawName;
       const value = v => { const text = String(v ?? "").trim(); return !text || text.toLocaleLowerCase("pt-BR") === "a definir" ? "—" : html(text); };
@@ -238,6 +321,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       }).join("");
       const guestDetails = guests.length ? `<details class="guest-details"><summary class="guest-details-summary">Ver dados dos ${guests.length} convidados</summary><div class="guest-table-wrap"><table class="guest-table"><thead><tr><th>Nome cadastrado</th><th>Idade</th><th>Categoria</th><th>Gênero</th><th>Bebida</th><th>Ações</th></tr></thead><tbody>${guestRows}</tbody></table></div></details>` : `<p class="group-meta">Nenhum convidado cadastrado</p>`;
       return `<article class="group-card"><header class="group-header"><div class="group-title"><h3>${html(groupName)}</h3><span class="status-badge ${active ? "" : "inactive"}">${active ? "Link ativo" : "Link inativo"}</span><p class="group-id">ID: ${html(id)}</p></div><div class="group-actions"><button class="small-button quiet-button" type="button" data-action="copy-link" data-id="${html(id)}" ${active ? "" : "disabled title=\"Ative o link antes de compartilhar\""}>Copiar link</button><button class="small-button primary-button" type="button" data-action="add-guest" data-id="${html(id)}" data-name="${html(groupName)}">Adicionar convidado</button><button class="small-button ${active ? "quiet-button" : "primary-button"}" type="button" data-action="${active ? "disable" : "enable"}" data-id="${html(id)}">${active ? "Desativar" : "Ativar"}</button><button class="small-button danger-button" type="button" data-action="delete" data-id="${html(id)}">Excluir grupo</button></div></header><div class="group-meta">Convidados <b>${guests.length}</b></div>${guestDetails}</article>`;
+      return `<article class="group-card"><header class="group-header"><div class="group-title"><h3>${html(groupName)}</h3><span class="status-badge ${active ? "" : "inactive"}">${active ? "Link ativo" : "Link inativo"}</span><p class="group-id">ID: ${html(id)}</p></div><div class="group-actions"><button class="small-button quiet-button" type="button" data-action="preview-link" data-id="${html(id)}" data-name="${html(groupName)}" ${active ? "" : "disabled title=\"Ative o link antes de compartilhar\""}>Visualizar link</button><button class="small-button primary-button" type="button" data-action="add-guest" data-id="${html(id)}" data-name="${html(groupName)}">Adicionar convidado</button><button class="small-button ${active ? "quiet-button" : "primary-button"}" type="button" data-action="${active ? "disable" : "enable"}" data-id="${html(id)}">${active ? "Desativar" : "Ativar"}</button><button class="small-button danger-button" type="button" data-action="delete" data-id="${html(id)}">Excluir grupo</button></div></header><div class="group-meta">Convidados <b>${guests.length}</b></div>${guestDetails}</article>`;
     }).join("");
   }
   document.addEventListener("DOMContentLoaded", () => {
@@ -255,7 +339,17 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     }
     else showLogin();
     $("login-form").addEventListener("submit", async e => { e.preventDefault(); state.email = $("admin-email").value.trim(); if (!state.email) return; if (await loadData()) rememberEmail(state.email); else state.email = rememberedEmail(); });
+    $("login-form").addEventListener("submit", async e => {
+      e.preventDefault(); state.email = $("admin-email").value.trim(); if (!state.email) return;
+      const button = $("login-button");
+      button.disabled = true; button.textContent = "Conectando ao painel…";
+      $("access-message").textContent = "Verificando seu e-mail e carregando famílias e convidados…";
+      try { if (await loadData()) rememberEmail(state.email); else state.email = rememberedEmail(); }
+      finally { button.disabled = false; button.textContent = "Acessar painel"; }
+    });
     $("refresh-button").addEventListener("click", loadData);
+    $("show-confirmed-button").addEventListener("click", showConfirmedGuests);
+    $("invite-copy-button").addEventListener("click", copyInviteLink);
     $("search-input").addEventListener("input", renderGroups);
     $("full-name-search").addEventListener("input", renderFullNames);
     $("new-group-button").addEventListener("click", () => $("group-dialog").showModal());
@@ -263,6 +357,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       const btn = e.target.closest("button[data-action]"); if (!btn || state.busy) return;
       const { action, id } = btn.dataset;
       if (action === "copy-link") { await copyInviteLink(id); return; }
+      if (action === "preview-link") { showInvitePreview(id, btn.dataset.name); return; }
       if (action === "add-guest") {
         const form = $("guest-form");
         form.reset(); form.elements.grupoId.value = id; form.elements.convidadoId.value = "";
@@ -329,7 +424,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     $("mobile-scrim").addEventListener("click", () => { $("sidebar").classList.remove("open"); $("mobile-scrim").hidden = true; });
   });
 })();
-
   </script>
 </head>
 <body>
@@ -344,7 +438,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       </nav>
       <div class="sidebar-bottom"><span class="private-label"><i></i> Acesso protegido pela API</span><p>As alterações são salvas no Google Sheets.</p></div>
     </aside>
-
     <main class="main-area" id="overview">
       <header class="topbar">
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
@@ -352,15 +445,12 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
         <span class="account-label" id="account-label">Verificando acesso…</span>
         <button class="quiet-button" id="refresh-button" type="button" hidden>Atualizar dados</button>
       </header>
-
       <div class="content-wrap">
         <section class="page-heading">
           <div><p class="eyebrow">Área administrativa</p><h1>Visão geral</h1><p class="heading-copy" id="event-summary">Acompanhe as confirmações e organize seus convidados.</p></div>
           <button class="primary-button" id="new-group-button" type="button" hidden><span aria-hidden="true">＋</span> Criar família</button>
         </section>
-
         <section class="notice" id="notice" role="status" aria-live="polite" hidden></section>
-
         <section class="access-panel" id="access-panel" aria-labelledby="access-title">
           <span class="access-symbol" aria-hidden="true">✦</span>
           <p class="eyebrow">Acesso administrativo</p>
@@ -372,19 +462,18 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
             <button class="primary-button" id="login-button" type="submit">Acessar painel</button>
           </form>
         </section>
-
         <div id="admin-content" hidden>
           <section class="metrics" aria-label="Estatísticas dos convidados">
+            <article class="metric"><span class="metric-label">GRUPOS</span><strong id="stat-groups">0</strong><span class="metric-foot">Famílias cadastradas</span></article>
             <article class="metric"><span class="metric-label">CONVIDADOS</span><strong id="stat-total">0</strong><span class="metric-foot">Na lista</span></article>
             <article class="metric"><span class="metric-label">CONFIRMADOS</span><strong id="stat-confirmed">0</strong><span class="metric-foot">Presenças confirmadas</span></article>
+            <article class="metric"><span class="metric-label">CONFIRMADOS</span><strong id="stat-confirmed">0</strong><button class="metric-link-button" id="show-confirmed-button" type="button">Ver quem confirmou</button></article>
             <article class="metric"><span class="metric-label">PENDENTES</span><strong id="stat-pending">0</strong><span class="metric-foot">Aguardando resposta</span></article>
             <article class="metric"><span class="metric-label">NÃO IRÃO</span><strong id="stat-declined">0</strong><span class="metric-foot">Respostas recebidas</span></article>
           </section>
-
           <section class="extra-stats" aria-label="Detalhes de convidados">
             <span><b id="stat-adults">0</b> adultos</span><span><b id="stat-children">0</b> crianças</span><span><b id="stat-men">0</b> homens</span><span><b id="stat-women">0</b> mulheres</span><span><b id="stat-drinks">0</b> com bebida</span>
           </section>
-
           <section class="groups-section" id="groups">
             <div class="section-heading"><div><p class="eyebrow">Lista de convidados</p><h2>Famílias e grupos</h2></div><label class="search-box"><span class="sr-only">Buscar família ou convidado</span><input id="search-input" type="search" placeholder="Buscar família" autocomplete="off"></label></div>
             <div id="groups-list" class="groups-list"></div>
@@ -400,7 +489,25 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     </main>
   </div>
   <div class="mobile-scrim" id="mobile-scrim" hidden></div>
-
+  <dialog class="modal" id="invite-dialog" aria-labelledby="invite-dialog-title">
+    <div class="modal-form">
+      <button class="modal-close" type="button" data-close="invite-dialog" aria-label="Fechar">×</button>
+      <p class="eyebrow">Convite individual</p><h2 id="invite-dialog-title">Link do convidado</h2>
+      <p class="section-copy">Prévia para <strong id="invite-family-name"></strong></p>
+      <label for="invite-url">Link de confirmação<input class="invite-preview-value" id="invite-url" type="text" readonly></label>
+      <p class="section-copy" id="invite-copy-status" role="status" aria-live="polite"></p>
+      <div class="modal-actions"><button class="quiet-button" type="button" data-close="invite-dialog">Fechar</button><a class="quiet-button" id="invite-open-link" href="#" target="_blank" rel="noopener noreferrer">Abrir prévia</a><button class="primary-button" id="invite-copy-button" type="button">Copiar link</button></div>
+    </div>
+  </dialog>
+  <dialog class="modal" id="confirmed-dialog" aria-labelledby="confirmed-dialog-title">
+    <div class="modal-form">
+      <button class="modal-close" type="button" data-close="confirmed-dialog" aria-label="Fechar">×</button>
+      <p class="eyebrow">Lista de presenças</p><h2 id="confirmed-dialog-title">Quem confirmou</h2>
+      <p class="section-copy" id="confirmed-count-label"></p>
+      <ul class="confirmed-list" id="confirmed-names-list"></ul>
+      <div class="modal-actions"><button class="quiet-button" type="button" data-close="confirmed-dialog">Fechar</button></div>
+    </div>
+  </dialog>
   <dialog class="modal" id="group-dialog" aria-labelledby="group-dialog-title">
     <form id="group-form" class="modal-form">
       <button class="modal-close" type="button" data-close="group-dialog" aria-label="Fechar">×</button>
@@ -410,7 +517,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="group-dialog">Cancelar</button><button class="primary-button" type="submit">Criar família</button></div>
     </form>
   </dialog>
-
   <dialog class="modal" id="guest-dialog" aria-labelledby="guest-dialog-title">
     <form id="guest-form" class="modal-form">
       <button class="modal-close" type="button" data-close="guest-dialog" aria-label="Fechar">×</button>
@@ -431,7 +537,3 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   </dialog>
 </body>
 </html>
-
-
-
-
