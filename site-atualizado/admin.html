@@ -7,18 +7,15 @@
   <meta name="referrer" content="no-referrer">
   <meta name="robots" content="noindex, nofollow">
   <title>Painel administrativo · Uma noite especial</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
 :root { color-scheme:dark; --night:#071735; --blue:#0B2454; --mid:#193D78; --light:#7295C5; --gold:#F5CC59; --cream:#F5F3EC; --muted:#AAB9D0; --line:rgba(114,149,197,.22); }
 * { box-sizing:border-box; }
 [hidden] { display:none!important; }
 html { min-height:100%; background:var(--night); scroll-behavior:smooth; overflow-x:clip; }
-body { min-width:0; min-height:100vh; margin:0; color:var(--cream); background:radial-gradient(ellipse at 90% 10%,rgba(25,61,120,.35),transparent 38%),linear-gradient(145deg,#071735,#0B2454 55%,#071735); font-family:Montserrat,sans-serif; overflow-x:clip; }
+body { min-width:0; min-height:100vh; margin:0; color:var(--cream); background:radial-gradient(ellipse at 90% 10%,rgba(25,61,120,.35),transparent 38%),linear-gradient(145deg,#071735,#0B2454 55%,#071735); font-family:system-ui,-apple-system,"Segoe UI",sans-serif; overflow-x:clip; }
 button,input,select { font:inherit; }
 .admin-shell { position:relative; z-index:1; min-height:100vh; }
-.sidebar { position:fixed; inset:0 auto 0 0; z-index:5; display:flex; width:248px; flex-direction:column; padding:32px 20px 24px; border-right:1px solid var(--line); background:rgba(5,19,45,.88); backdrop-filter:blur(16px); }
+.sidebar { position:fixed; inset:0 auto 0 0; z-index:5; display:flex; width:248px; flex-direction:column; padding:32px 20px 24px; border-right:1px solid var(--line); background:rgba(5,19,45,.97); }
 .brand { display:flex; align-items:center; gap:13px; color:var(--cream); text-decoration:none; font:600 1.12rem/1 "Cormorant Garamond",Georgia,serif; letter-spacing:.02em; }
 .brand em { color:var(--gold); font-weight:500; }.brand-mark { color:var(--gold); font:1.55rem Georgia,serif; }
 .nav-caption { margin:58px 0 12px 12px; color:#7488a8; font-size:.59rem; font-weight:700; letter-spacing:.2em; }
@@ -106,7 +103,8 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   </style>
   <script defer>
 (() => {
-  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbzQAWpdl3k21W4vMKF8cxeZDW55pQdiNkQYGHuBlEt3IIiROQioj8N2WmJhXfKYfgSwDQ/exec";
+  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbx9i55ldw-sSx16ifP2jdu0ULdvuiCe4UnDSZ_N5YR6dJLTocpGihGs7wpSdTH5dA4OsQ/exec";
+  const SITE_BASE_URL = "https://ysmmcf.github.io/Confirmacaodudagogh/";
   const state = { email: "", groups: [], guests: [], responses: [], busy: false };
   const $ = (id) => document.getElementById(id);
   const setSelect = (select, value) => { const target = String(value ?? "").trim().toLocaleLowerCase("pt-BR"); const option = Array.from(select.options).find(item => item.value.trim().toLocaleLowerCase("pt-BR") === target); select.value = option ? option.value : ""; };
@@ -134,7 +132,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   function showLogin() { $("access-panel").hidden = false; $("admin-content").hidden = true; $("new-group-button").hidden = true; }
   function showDashboard() { $("access-panel").hidden = true; $("admin-content").hidden = false; $("new-group-button").hidden = false; $("refresh-button").hidden = false; $("account-label").textContent = state.email; }
   async function copyInviteLink(groupId) {
-    const invite = new URL("confirmar.html", window.location.href);
+    const invite = new URL("confirmar.html", SITE_BASE_URL);
     invite.searchParams.set("token", groupId);
     try {
       await navigator.clipboard.writeText(invite.href);
@@ -174,14 +172,60 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       ["stat-women", state.guests.filter(g => String(g.genero || "").toLowerCase().includes("femin")).length],
       ["stat-drinks", state.guests.filter(g => truthy(g.bebida)).length]].forEach(([id, n]) => { if ($(id)) $(id).textContent = n; });
     renderGroups();
+    renderFullNames();
+  }
+  function renderFullNames() {
+    const list = $("full-names-list"), count = $("full-names-count");
+    if (!list || !count) return;
+    const query = ($("full-name-search")?.value || "").trim().toLocaleLowerCase("pt-BR");
+    const guestById = new Map(state.guests.map(g => [String(g.id ?? g.convidadoid ?? g.idconvidado ?? ""), g]));
+    const groupById = new Map(state.groups.map(g => [String(g.id ?? g.grupoId ?? g.grupoid ?? ""), g]));
+    const latest = new Map();
+    state.responses.forEach(r => {
+      const guestId = String(r.convidadoid ?? r.convidadoId ?? r.idconvidado ?? "");
+      if (guestId) latest.set(guestId, r);
+    });
+    const entries = [];
+    latest.forEach((r, guestId) => {
+      const fullName = String(r.nomecompleto ?? r.nomecompletoinformado ?? r.nomeCompleto ?? "").trim();
+      if (!fullName) return;
+      const guest = guestById.get(guestId) || {};
+      const groupId = String(r.grupoid ?? r.grupoId ?? r.idgrupo ?? guest.grupoid ?? guest.grupoId ?? "");
+      const group = groupById.get(groupId);
+      const registeredName = guest.nome || guest.name || "";
+      const familyName = group?.nome || "Família";
+      const haystack = (fullName + " " + registeredName + " " + familyName).toLocaleLowerCase("pt-BR");
+      if (!query || haystack.includes(query)) entries.push({ fullName, familyName, registeredName });
+    });
+    count.textContent = entries.length + " nome" + (entries.length === 1 ? "" : "s") + " informado" + (entries.length === 1 ? "" : "s");
+    if (!entries.length) {
+      list.innerHTML = state.responses.length
+        ? '<div class="empty-state">Os nomes completos enviados aparecerão aqui após serem salvos.</div>'
+        : '<div class="empty-state">Ainda não há nomes completos informados.</div>';
+      return;
+    }
+    const grouped = new Map();
+    entries.forEach(entry => { if (!grouped.has(entry.familyName)) grouped.set(entry.familyName, []); grouped.get(entry.familyName).push(entry); });
+    list.innerHTML = Array.from(grouped, ([family, people]) =>
+      '<article class="full-name-group"><h3 class="full-name-group-title">' + html(family) +
+      '</h3><ul class="full-name-group-list">' +
+      people.map(p => '<li>' + html(p.fullName) +
+        (p.registeredName ? ' <span class="muted">(cadastro: ' + html(p.registeredName) + ')</span>' : '') +
+        '</li>').join("") + '</ul></article>').join("");
   }
   function renderGroups() {
     const list = $("groups-list"), query = ($("search-input")?.value || "").trim().toLocaleLowerCase("pt-BR");
+    const guestsByGroup = new Map();
+    state.guests.forEach(guest => {
+      const groupId = String(guest.grupoId ?? guest.idGrupo ?? guest.grupoid ?? guest.idgrupo ?? "");
+      if (!guestsByGroup.has(groupId)) guestsByGroup.set(groupId, []);
+      guestsByGroup.get(groupId).push(guest);
+    });
     const groups = state.groups.filter(g => `${g.nome || ""} ${g.id || ""}`.toLocaleLowerCase("pt-BR").includes(query)).sort((a, b) => String(a.nome || "").localeCompare(String(b.nome || ""), "pt-BR", { sensitivity: "base" }));
     if (!groups.length) { list.innerHTML = `<div class="empty-state">${state.groups.length ? "Nenhum grupo corresponde à busca." : "Nenhuma família cadastrada."}</div>`; return; }
     list.innerHTML = groups.map(g => {
       const id = String(g.id ?? g.grupoId ?? ""), active = truthy(g.ativo ?? g.active);
-      const guests = state.guests.filter(x => String(x.grupoId ?? x.idGrupo ?? x.grupoid ?? x.idgrupo ?? "") === id);
+      const guests = guestsByGroup.get(id) || [];
       const rawName = String(g.nome || "").trim();
       const groupName = !rawName || rawName.toLocaleLowerCase("pt-BR") === "a definir" ? "Família sem nome" : rawName;
       const value = v => { const text = String(v ?? "").trim(); return !text || text.toLocaleLowerCase("pt-BR") === "a definir" ? "—" : html(text); };
@@ -210,6 +254,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     $("login-form").addEventListener("submit", async e => { e.preventDefault(); state.email = $("admin-email").value.trim(); if (!state.email) return; if (await loadData()) rememberEmail(state.email); else state.email = rememberedEmail(); });
     $("refresh-button").addEventListener("click", loadData);
     $("search-input").addEventListener("input", renderGroups);
+    $("full-name-search").addEventListener("input", renderFullNames);
     $("new-group-button").addEventListener("click", () => $("group-dialog").showModal());
     $("groups-list").addEventListener("click", async e => {
       const btn = e.target.closest("button[data-action]"); if (!btn || state.busy) return;
@@ -368,6 +413,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   </dialog>
 </body>
 </html>
+
 
 
 
