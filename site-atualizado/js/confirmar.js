@@ -1,7 +1,7 @@
 "use strict";
 
 (() => {
-  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbx9i55ldw-sSx16ifP2jdu0ULdvuiCe4UnDSZ_N5YR6dJLTocpGihGs7wpSdTH5dA4OsQ/exec";
+  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbye0yw0ca2pORfpLLtNQjS63mqDrixLEGMwLSZ8ueZP83AmCaSo3TpP-Ykv-2R0FdFkCA/exec";
 
   async function callApi(payload) {
     const response = await fetch(API_BASE_URL, {
