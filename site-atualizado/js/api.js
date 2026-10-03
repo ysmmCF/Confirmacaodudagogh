@@ -2,7 +2,7 @@
  * API Service - Comunicação com Google Apps Script
  */
 
-const API_BASE_URL = "https://script.google.com/macros/s/AKfycbydTZCQBrUqSS1KJTLULSaRDa_qMm3ujrR1uJTRtztyB6dD5O8684ghrc4G0tEHiR0Hww/exec";
+const API_BASE_URL = "https://script.google.com/macros/s/AKfycbwUDkqeGkfGt5U0K_ye1LJH1dxrNz7JhIARJqXBi81gnuFQ4wFKIuaxG7q0uaoVL6MZ9w/exec";
 
 const API = {
   /**
