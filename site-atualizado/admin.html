@@ -93,6 +93,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
  .topbar { min-height:62px; flex-wrap:wrap; justify-content:space-between; padding:10px 16px max(10px,env(safe-area-inset-top)); gap:8px 10px; }.menu-toggle { display:block; flex:0 0 auto; margin-right:0; padding:8px; cursor:pointer; }.topbar-label { flex:1 1 120px; margin-right:0; font-size:.55rem; line-height:1.5; }.account-label { flex:1 1 150px; max-width:none; font-size:.62rem; white-space:normal; overflow-wrap:anywhere; }.topbar .quiet-button { flex:0 0 auto; min-height:42px; padding:0 10px; font-size:.57rem; }
  .content-wrap { padding:34px 18px 22px; }.page-heading { align-items:flex-start; flex-direction:column; margin-bottom:22px; }.page-heading .primary-button { width:100%; min-height:48px; }.heading-copy { max-width:360px; }
  .access-panel { min-height:300px; padding:23px 18px; }.access-panel h2 { font-size:1.9rem; }.login-form { width:100%; }
+ .access-panel { min-height:300px; padding:23px 18px; }.access-panel h2 { font-size:1.9rem; }
  .metrics { gap:9px; margin:16px 0 10px; }.metric { min-height:105px; padding:13px; }.metric-label { font-size:.48rem; }.metric strong { font-size:1.8rem; }.metric-foot { font-size:.5rem; }
  .extra-stats { gap:9px 15px; margin-bottom:34px; padding:13px; font-size:.57rem; }.section-heading { align-items:stretch; flex-direction:column; }.search-box input { width:100%; min-height:45px; }
  .full-names-section { margin-top:44px; }.full-name-group { padding:15px; }.full-name-group-title { font-size:1.18rem; }.full-name-group-list li { font-size:.76rem; }
@@ -103,13 +104,14 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
 }
 @media (max-width:370px) { .account-label { max-width:none; }.topbar .quiet-button { font-size:.56rem; padding:0 8px; }.metric { padding:10px; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; } }
+
   </style>
   <script defer>
 (() => {
-  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbwUDkqeGkfGt5U0K_ye1LJH1dxrNz7JhIARJqXBi81gnuFQ4wFKIuaxG7q0uaoVL6MZ9w/exec";
+  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbye0yw0ca2pORfpLLtNQjS63mqDrixLEGMwLSZ8ueZP83AmCaSo3TpP-Ykv-2R0FdFkCA/exec";
   const SITE_BASE_URL = "https://ysmmcf.github.io/Confirmacaodudagogh/";
   const state = { email: "", groups: [], guests: [], responses: [], busy: false };
-  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbydTZCQBrUqSS1KJTLULSaRDa_qMm3ujrR1uJTRtztyB6dD5O8684ghrc4G0tEHiR0Hww/exec";
+  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbwUDkqeGkfGt5U0K_ye1LJH1dxrNz7JhIARJqXBi81gnuFQ4wFKIuaxG7q0uaoVL6MZ9w/exec";
   const state = { email: "", groups: [], guests: [], responses: [], responsesLoaded: false, responseLoadError: false, busy: false };
   const $ = (id) => document.getElementById(id);
   let noticeTimer = null;
@@ -119,6 +121,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   const rememberEmail = (email) => { try { localStorage.setItem("admin_email", email); } catch (_) { notice("O navegador bloqueou o armazenamento local. O painel ainda pode ser acessado, mas talvez seja necessário informar o e-mail na próxima abertura.", true); } };
   const html = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const truthy = (v) => v === true || ["true", "sim", "ativo", "1"].includes(String(v).trim().toLowerCase());
+
   async function request(payload) {
     const res = await fetch(API_BASE_URL, { method: "POST", mode: "cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
     if (!res.ok) throw new Error(`Erro HTTP ${res.status}`);
@@ -134,13 +137,17 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   function loading(on) {
     state.busy = on;
     ["login-button", "refresh-button", "new-group-button"].forEach(id => { const b = $(id); if (b) b.disabled = on; });
+    ["refresh-button", "new-group-button"].forEach(id => { const b = $(id); if (b) b.disabled = on; });
     document.querySelectorAll(".group-actions button").forEach(b => b.disabled = on);
     if ($("account-label") && state.email) $("account-label").textContent = on ? "Salvando…" : state.email;
+    if ($("account-label") && state.email) $("account-label").textContent = on ? "Salvando…" : "Administrador";
   }
   function showLogin() { $("access-panel").hidden = false; $("admin-content").hidden = true; $("new-group-button").hidden = true; }
   function showDashboard() { $("access-panel").hidden = true; $("admin-content").hidden = false; $("new-group-button").hidden = false; $("refresh-button").hidden = false; $("account-label").textContent = state.email; }
   async function copyInviteLink(groupId) {
     const invite = new URL("confirmar.html", SITE_BASE_URL);
+  function showLogin(message) { $("access-panel").hidden = false; $("admin-content").hidden = true; $("new-group-button").hidden = true; if (message) $("access-message").textContent = message; }
+  function showDashboard() { $("access-panel").hidden = true; $("admin-content").hidden = false; $("new-group-button").hidden = false; $("refresh-button").hidden = false; $("account-label").textContent = "Administrador"; }
   function buildInviteUrl(groupId) {
     const invite = new URL("confirmar.html", window.location.href);
     invite.search = "";
@@ -212,6 +219,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     try {
       const data = await api("adminData");
       if (!data || data.ok !== true) throw new Error(data?.message || "Acesso negado. Confira se este e-mail está cadastrado como administrador.");
+      if (!data || data.ok !== true) throw new Error(data?.message || "Não foi possível validar a sessão salva neste navegador.");
       state.groups = data.grupos || data.groups || [];
       const directGuests = data.convidados || data.guests || [];
       const nestedGuests = state.groups.flatMap(g => (g.convidados || g.guests || []).map(x => ({ ...x, grupoId: x.grupoId ?? x.idGrupo ?? x.grupoid ?? x.idgrupo ?? g.id ?? g.grupoId ?? g.grupoid })));
@@ -329,24 +337,20 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     if (saved) {
       state.email = saved; $("admin-email").value = saved; $("account-label").textContent = saved;
       $("access-message").textContent = "Este navegador já lembra seu e-mail. Estamos verificando o acesso automaticamente.";
+      state.email = saved; $("account-label").textContent = "Administrador";
+      $("access-message").textContent = "Restaurando seu acesso salvo neste navegador…";
       loadData().then(ok => {
         if (!ok) {
           showLogin(); $("admin-email").value = saved;
           $("access-message").textContent = "Seu e-mail continua salvo. Tente novamente quando a conexão com o serviço estiver disponível, ou altere o e-mail se necessário.";
           $("login-button").textContent = "Tentar acessar novamente";
+          showLogin("Não foi possível validar o acesso salvo. Verifique a conexão ou abra o painel no navegador em que você já havia acessado.");
         }
       });
     }
     else showLogin();
     $("login-form").addEventListener("submit", async e => { e.preventDefault(); state.email = $("admin-email").value.trim(); if (!state.email) return; if (await loadData()) rememberEmail(state.email); else state.email = rememberedEmail(); });
-    $("login-form").addEventListener("submit", async e => {
-      e.preventDefault(); state.email = $("admin-email").value.trim(); if (!state.email) return;
-      const button = $("login-button");
-      button.disabled = true; button.textContent = "Conectando ao painel…";
-      $("access-message").textContent = "Verificando seu e-mail e carregando famílias e convidados…";
-      try { if (await loadData()) rememberEmail(state.email); else state.email = rememberedEmail(); }
-      finally { button.disabled = false; button.textContent = "Acessar painel"; }
-    });
+    else showLogin("Este navegador ainda não tem uma sessão administrativa salva. Abra o painel no navegador em que você já entrou antes.");
     $("refresh-button").addEventListener("click", loadData);
     $("show-confirmed-button").addEventListener("click", showConfirmedGuests);
     $("invite-copy-button").addEventListener("click", copyInviteLink);
@@ -424,6 +428,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     $("mobile-scrim").addEventListener("click", () => { $("sidebar").classList.remove("open"); $("mobile-scrim").hidden = true; });
   });
 })();
+
   </script>
 </head>
 <body>
@@ -438,6 +443,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       </nav>
       <div class="sidebar-bottom"><span class="private-label"><i></i> Acesso protegido pela API</span><p>As alterações são salvas no Google Sheets.</p></div>
     </aside>
+
     <main class="main-area" id="overview">
       <header class="topbar">
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
@@ -445,12 +451,15 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
         <span class="account-label" id="account-label">Verificando acesso…</span>
         <button class="quiet-button" id="refresh-button" type="button" hidden>Atualizar dados</button>
       </header>
+
       <div class="content-wrap">
         <section class="page-heading">
           <div><p class="eyebrow">Área administrativa</p><h1>Visão geral</h1><p class="heading-copy" id="event-summary">Acompanhe as confirmações e organize seus convidados.</p></div>
           <button class="primary-button" id="new-group-button" type="button" hidden><span aria-hidden="true">＋</span> Criar família</button>
         </section>
+
         <section class="notice" id="notice" role="status" aria-live="polite" hidden></section>
+
         <section class="access-panel" id="access-panel" aria-labelledby="access-title">
           <span class="access-symbol" aria-hidden="true">✦</span>
           <p class="eyebrow">Acesso administrativo</p>
@@ -461,7 +470,10 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
             <input id="admin-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="nome@exemplo.com">
             <button class="primary-button" id="login-button" type="submit">Acessar painel</button>
           </form>
+          <h2 id="access-title">Abrindo o painel</h2>
+          <p id="access-message">Restaurando o acesso salvo neste navegador…</p>
         </section>
+
         <div id="admin-content" hidden>
           <section class="metrics" aria-label="Estatísticas dos convidados">
             <article class="metric"><span class="metric-label">GRUPOS</span><strong id="stat-groups">0</strong><span class="metric-foot">Famílias cadastradas</span></article>
@@ -471,9 +483,11 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
             <article class="metric"><span class="metric-label">PENDENTES</span><strong id="stat-pending">0</strong><span class="metric-foot">Aguardando resposta</span></article>
             <article class="metric"><span class="metric-label">NÃO IRÃO</span><strong id="stat-declined">0</strong><span class="metric-foot">Respostas recebidas</span></article>
           </section>
+
           <section class="extra-stats" aria-label="Detalhes de convidados">
             <span><b id="stat-adults">0</b> adultos</span><span><b id="stat-children">0</b> crianças</span><span><b id="stat-men">0</b> homens</span><span><b id="stat-women">0</b> mulheres</span><span><b id="stat-drinks">0</b> com bebida</span>
           </section>
+
           <section class="groups-section" id="groups">
             <div class="section-heading"><div><p class="eyebrow">Lista de convidados</p><h2>Famílias e grupos</h2></div><label class="search-box"><span class="sr-only">Buscar família ou convidado</span><input id="search-input" type="search" placeholder="Buscar família" autocomplete="off"></label></div>
             <div id="groups-list" class="groups-list"></div>
@@ -489,6 +503,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     </main>
   </div>
   <div class="mobile-scrim" id="mobile-scrim" hidden></div>
+
   <dialog class="modal" id="invite-dialog" aria-labelledby="invite-dialog-title">
     <div class="modal-form">
       <button class="modal-close" type="button" data-close="invite-dialog" aria-label="Fechar">×</button>
@@ -499,6 +514,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="invite-dialog">Fechar</button><a class="quiet-button" id="invite-open-link" href="#" target="_blank" rel="noopener noreferrer">Abrir prévia</a><button class="primary-button" id="invite-copy-button" type="button">Copiar link</button></div>
     </div>
   </dialog>
+
   <dialog class="modal" id="confirmed-dialog" aria-labelledby="confirmed-dialog-title">
     <div class="modal-form">
       <button class="modal-close" type="button" data-close="confirmed-dialog" aria-label="Fechar">×</button>
@@ -508,6 +524,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="confirmed-dialog">Fechar</button></div>
     </div>
   </dialog>
+
   <dialog class="modal" id="group-dialog" aria-labelledby="group-dialog-title">
     <form id="group-form" class="modal-form">
       <button class="modal-close" type="button" data-close="group-dialog" aria-label="Fechar">×</button>
@@ -517,6 +534,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="group-dialog">Cancelar</button><button class="primary-button" type="submit">Criar família</button></div>
     </form>
   </dialog>
+
   <dialog class="modal" id="guest-dialog" aria-labelledby="guest-dialog-title">
     <form id="guest-form" class="modal-form">
       <button class="modal-close" type="button" data-close="guest-dialog" aria-label="Fechar">×</button>
@@ -537,3 +555,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   </dialog>
 </body>
 </html>
+
+
+
