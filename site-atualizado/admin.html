@@ -42,14 +42,6 @@ h1 { font-size:clamp(2.6rem,5vw,3.7rem); line-height:1; }.heading-copy { margin:
 .danger-button { border-color:rgba(230,145,133,.42); color:#edb3a9; background:transparent; }.danger-button:hover { border-color:#e9a093; background:rgba(230,145,133,.08); }
 button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quiet-button:focus-visible,.danger-button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible { outline:2px solid var(--gold); outline-offset:3px; }
 .notice { position:fixed; right:22px; bottom:22px; z-index:20; width:min(440px,calc(100vw - 32px)); margin:0; padding:13px 16px; border:1px solid var(--line); color:#d4deeb; background:#091b3d; box-shadow:0 14px 42px rgba(0,0,0,.38); font-size:.72rem; line-height:1.6; }.notice.success { display:flex; align-items:center; gap:10px; border-color:rgba(127,183,154,.4); color:#c5e1d2; }.notice.success::before { content:"✓"; display:grid; width:23px; height:23px; flex:0 0 23px; place-items:center; border:1px solid rgba(127,183,154,.6); border-radius:50%; color:#bde1cb; font-size:.8rem; font-weight:700; }.notice.error { border-color:rgba(230,145,133,.5); color:#ffd1c8; }
-.access-panel { min-height:330px; display:grid; justify-items:center; align-content:center; gap:12px; padding:32px; border:1px solid var(--line); background:linear-gradient(145deg,rgba(25,61,120,.2),rgba(5,19,45,.48)); text-align:center; }
-.access-symbol { color:var(--gold); font-size:1.7rem; }.access-panel h2 { font-size:2.2rem; }.access-panel p:not(.eyebrow) { max-width:480px; margin:0; color:var(--muted); font-size:.73rem; line-height:1.8; }
-.login-form { display:grid; width:min(100%,380px); justify-items:stretch; gap:9px; margin-top:7px; text-align:left; }
-.login-form label { color:#bcc9dc; font-size:.62rem; }
-.login-form input { width:100%; min-height:48px; padding:0 13px; border:1px solid var(--line); border-radius:0; color:var(--cream); background:rgba(5,19,45,.72); font-size:.72rem; }
-.login-form input::placeholder { color:#8295b2; }
-.login-form button { width:100%; min-height:48px; margin-top:5px; }
-.metrics { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:13px; margin:20px 0 12px; }
 .metrics { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:13px; margin:20px 0 12px; }
 .metric { min-height:126px; display:flex; flex-direction:column; justify-content:center; gap:8px; padding:18px; border:1px solid var(--line); background:linear-gradient(145deg,rgba(25,61,120,.24),rgba(7,23,53,.4)); }
 .metric-label { color:#94a8c4; font-size:.55rem; font-weight:700; letter-spacing:.14em; }.metric strong { color:var(--cream); font:500 2rem/1 "Cormorant Garamond",Georgia,serif; }.metric-foot { color:#768aa9; font-size:.56rem; }
@@ -92,23 +84,19 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
  .sidebar { width:260px; transform:translateX(-100%); transition:transform .22s ease; }.sidebar.open { transform:translateX(0); }.main-area { margin-left:0; }
  .topbar { min-height:62px; flex-wrap:wrap; justify-content:space-between; padding:10px 16px max(10px,env(safe-area-inset-top)); gap:8px 10px; }.menu-toggle { display:block; flex:0 0 auto; margin-right:0; padding:8px; cursor:pointer; }.topbar-label { flex:1 1 120px; margin-right:0; font-size:.55rem; line-height:1.5; }.account-label { flex:1 1 150px; max-width:none; font-size:.62rem; white-space:normal; overflow-wrap:anywhere; }.topbar .quiet-button { flex:0 0 auto; min-height:42px; padding:0 10px; font-size:.57rem; }
  .content-wrap { padding:34px 18px 22px; }.page-heading { align-items:flex-start; flex-direction:column; margin-bottom:22px; }.page-heading .primary-button { width:100%; min-height:48px; }.heading-copy { max-width:360px; }
- .access-panel { min-height:300px; padding:23px 18px; }.access-panel h2 { font-size:1.9rem; }.login-form { width:100%; }
  .metrics { gap:9px; margin:16px 0 10px; }.metric { min-height:105px; padding:13px; }.metric-label { font-size:.48rem; }.metric strong { font-size:1.8rem; }.metric-foot { font-size:.5rem; }
  .extra-stats { gap:9px 15px; margin-bottom:34px; padding:13px; font-size:.57rem; }.section-heading { align-items:stretch; flex-direction:column; }.search-box input { width:100%; min-height:45px; }
  .full-names-section { margin-top:44px; }.full-name-group { padding:15px; }.full-name-group-title { font-size:1.18rem; }.full-name-group-list li { font-size:.76rem; }
- .group-header { align-items:flex-start; flex-direction:column; padding:15px; }.group-title { width:100%; }.group-actions { width:100%; justify-content:stretch; }.group-actions button { flex:1; min-height:42px; }.group-meta { padding:11px 15px; }.invite-link-row { padding:0 15px 13px; }.guest-details { margin:0 15px 13px; }.guest-table-wrap { overflow-x:clip; }.guest-table,.guest-table tbody { display:block; width:100%; }.guest-table thead { display:none; }.guest-table tbody { display:grid; gap:8px; padding:10px; }.guest-table tbody tr { display:grid; min-width:0; overflow:hidden; border:1px solid rgba(114,149,197,.22); border-radius:6px; background:rgba(7,23,53,.38); }.guest-table td { display:grid; grid-template-columns:minmax(72px,32%) minmax(0,1fr); align-items:start; gap:8px; min-width:0; padding:10px 8px; border-bottom:1px solid rgba(114,149,197,.11); font-size:.65rem; line-height:1.5; overflow-wrap:anywhere; }.guest-table td::before { color:#8298b7; content:attr(data-label); font-size:.5rem; font-weight:700; letter-spacing:.04em; line-height:1.5; }.guest-table td[colspan] { display:block; text-align:center; }.guest-table td[colspan]::before { content:none; }.guest-table .guest-actions-cell { display:block; }.guest-table .guest-actions-cell button { width:100%; min-height:44px; }.guest-table .guest-actions-cell::before { display:block; margin-bottom:8px; }
  .group-header { align-items:flex-start; flex-direction:column; padding:15px; }.group-title { width:100%; }.group-actions { width:100%; justify-content:stretch; }.group-actions button { flex:1; min-height:42px; }.group-meta { padding:11px 15px; }.invite-preview { margin:0 15px 13px; }.invite-link-row { padding:0 15px 13px; }.guest-details { margin:0 15px 13px; }.guest-table-wrap { overflow-x:clip; }.guest-table,.guest-table tbody { display:block; width:100%; }.guest-table thead { display:none; }.guest-table tbody { display:grid; gap:8px; padding:10px; }.guest-table tbody tr { display:grid; min-width:0; overflow:hidden; border:1px solid rgba(114,149,197,.22); border-radius:6px; background:rgba(7,23,53,.38); }.guest-table td { display:grid; grid-template-columns:minmax(72px,32%) minmax(0,1fr); align-items:start; gap:8px; min-width:0; padding:10px 8px; border-bottom:1px solid rgba(114,149,197,.11); font-size:.65rem; line-height:1.5; overflow-wrap:anywhere; }.guest-table td::before { color:#8298b7; content:attr(data-label); font-size:.5rem; font-weight:700; letter-spacing:.04em; line-height:1.5; }.guest-table td[colspan] { display:block; text-align:center; }.guest-table td[colspan]::before { content:none; }.guest-table .guest-actions-cell { display:block; }.guest-table .guest-actions-cell button { width:100%; min-height:44px; }.guest-table .guest-actions-cell::before { display:block; margin-bottom:8px; }
  .modal-form { gap:13px; padding:25px 19px 20px; }.form-grid { gap:11px; }.modal-actions > * { flex:1; }
  .mobile-scrim:not([hidden]) { position:fixed; inset:0; z-index:4; display:block; background:rgba(1,8,22,.66); }
 }
 @media (max-width:370px) { .account-label { max-width:none; }.topbar .quiet-button { font-size:.56rem; padding:0 8px; }.metric { padding:10px; } }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; animation-iteration-count:1!important; } }
+
   </style>
   <script defer>
 (() => {
-  const API_BASE_URL = "https://script.google.com/macros/s/AKfycbye0yw0ca2pORfpLLtNQjS63mqDrixLEGMwLSZ8ueZP83AmCaSo3TpP-Ykv-2R0FdFkCA/exec";
-  const SITE_BASE_URL = "https://ysmmcf.github.io/Confirmacaodudagogh/";
-  const state = { email: "", groups: [], guests: [], responses: [], busy: false };
   const API_BASE_URL = "https://script.google.com/macros/s/AKfycbwUDkqeGkfGt5U0K_ye1LJH1dxrNz7JhIARJqXBi81gnuFQ4wFKIuaxG7q0uaoVL6MZ9w/exec";
   const state = { email: "", groups: [], guests: [], responses: [], responsesLoaded: false, responseLoadError: false, busy: false, accessReady: false };
   const $ = (id) => document.getElementById(id);
@@ -116,9 +104,9 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   let responseLoadSequence = 0;
   const setSelect = (select, value) => { const target = String(value ?? "").trim().toLocaleLowerCase("pt-BR"); const option = Array.from(select.options).find(item => item.value.trim().toLocaleLowerCase("pt-BR") === target); select.value = option ? option.value : ""; };
   const rememberedEmail = () => { try { return localStorage.getItem("admin_email") || ""; } catch (_) { return ""; } };
-  const rememberEmail = (email) => { try { localStorage.setItem("admin_email", email); } catch (_) { notice("O navegador bloqueou o armazenamento local. O painel ainda pode ser acessado, mas talvez seja necessário informar o e-mail na próxima abertura.", true); } };
   const html = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
   const truthy = (v) => v === true || ["true", "sim", "ativo", "1"].includes(String(v).trim().toLowerCase());
+
   async function request(payload) {
     const res = await fetch(API_BASE_URL, { method: "POST", mode: "cors", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
     if (!res.ok) throw new Error(`Erro HTTP ${res.status}`);
@@ -133,19 +121,12 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   }
   function loading(on) {
     state.busy = on;
-    ["login-button", "refresh-button", "new-group-button"].forEach(id => { const b = $(id); if (b) b.disabled = on; });
-    document.querySelectorAll(".group-actions button").forEach(b => b.disabled = on);
-    if ($("account-label") && state.email) $("account-label").textContent = on ? "Salvando…" : state.email;
     const refresh = $("refresh-button"), newGroup = $("new-group-button");
     if (refresh) refresh.disabled = on;
     if (newGroup) newGroup.disabled = on || !state.accessReady;
     document.querySelectorAll(".group-actions button").forEach(b => b.disabled = on || !state.accessReady);
     if ($("account-label")) $("account-label").textContent = on ? "Verificando…" : state.accessReady ? "Administrador" : "Acesso pendente";
   }
-  function showLogin() { $("access-panel").hidden = false; $("admin-content").hidden = true; $("new-group-button").hidden = true; }
-  function showDashboard() { $("access-panel").hidden = true; $("admin-content").hidden = false; $("new-group-button").hidden = false; $("refresh-button").hidden = false; $("account-label").textContent = state.email; }
-  async function copyInviteLink(groupId) {
-    const invite = new URL("confirmar.html", SITE_BASE_URL);
   function showDashboard() { $("admin-content").hidden = false; $("new-group-button").hidden = false; $("refresh-button").hidden = false; }
   function buildInviteUrl(groupId) {
     const invite = new URL("confirmar.html", window.location.href);
@@ -164,18 +145,14 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   async function copyInviteLink() {
     const inviteUrl = $("invite-url").value;
     try {
-      await navigator.clipboard.writeText(invite.href);
       await navigator.clipboard.writeText(inviteUrl);
     } catch (_) {
-      const input = document.createElement("textarea"); input.value = invite.href; input.style.position = "fixed"; input.style.opacity = "0";
       const input = document.createElement("textarea"); input.value = inviteUrl; input.style.position = "fixed"; input.style.opacity = "0";
       document.body.appendChild(input); input.select();
       const copied = document.execCommand("copy"); input.remove();
-      if (!copied) { notice(`Copie o link: ${invite.href}`, true); return; }
       if (!copied) { $("invite-copy-status").textContent = "Não foi possível copiar automaticamente. Selecione e copie o link acima."; return; }
     }
     $("invite-copy-status").textContent = "Link copiado. Você já pode enviá-lo ao convidado.";
-    notice("Link copiado para a área de transferência. Você já pode enviá-lo ao convidado.", false, true);
     notice("Link copiado para a área de transferência.", false, true);
   }
   function showConfirmedGuests() {
@@ -217,7 +194,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     loading(true); if (!preserveNotice) notice("");
     try {
       const data = await api("adminData");
-      if (!data || data.ok !== true) throw new Error(data?.message || "Acesso negado. Confira se este e-mail está cadastrado como administrador.");
       if (!data || data.ok !== true) throw new Error(data?.message || "Não foi possível validar a sessão salva neste navegador.");
       state.accessReady = true;
       state.groups = data.grupos || data.groups || [];
@@ -228,7 +204,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       state.responses = data.respostas || data.responses || [];
       state.responsesLoaded = Array.isArray(data.respostas || data.responses) && (data.respostas || data.responses).length > 0;
       state.responseLoadError = false;
-      render(); showDashboard();
       render(); showDashboard(); notice("");
       if ($("last-updated")) $("last-updated").textContent = new Intl.DateTimeFormat("pt-BR", { dateStyle: "short", timeStyle: "short" }).format(new Date());
       // Mostra grupos e convidados primeiro; respostas e nomes completos carregam em segundo plano.
@@ -246,7 +221,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
         console.warn("Respostas ainda não carregadas:", error);
       });
       return true;
-    } catch (err) { if (!preserveNotice) notice(err.message || "Não foi possível carregar os dados. Verifique a conexão com a API.", true); return false; }
     } catch (err) { state.accessReady = false; if (!preserveNotice) notice(err.message || "Não foi possível carregar os dados. Verifique a conexão com a API.", true); return false; }
     finally { loading(false); }
   }
@@ -254,7 +228,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     const confirmed = state.responses.filter(r => truthy(r.presenca) || truthy(r.confirmado) || ["sim", "confirmado"].includes(String(r.resposta || "").trim().toLowerCase())).length;
     const declined = state.responses.filter(r => ["nao", "não", "false", "não irá", "nao ira"].includes(String(r.presenca ?? r.resposta ?? r.confirmado).trim().toLowerCase())).length;
     const total = state.guests.length;
-    [["stat-total", total], ["stat-confirmed", confirmed], ["stat-pending", Math.max(0, total - confirmed - declined)], ["stat-declined", declined],
     [["stat-groups", state.groups.length], ["stat-total", total], ["stat-confirmed", state.responsesLoaded ? confirmed : "…"], ["stat-pending", state.responsesLoaded ? Math.max(0, total - confirmed - declined) : "…"], ["stat-declined", state.responsesLoaded ? declined : "…"],
       ["stat-adults", state.guests.filter(g => String(g.categoria || "").toLowerCase().includes("adult")).length],
       ["stat-children", state.guests.filter(g => String(g.categoria || "").toLowerCase().includes("crian")).length],
@@ -330,7 +303,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
         return `<tr><td data-label="Nome cadastrado">${value(x.nome || x.name)}</td><td data-label="Idade">${value(x.idade)}</td><td data-label="Categoria">${value(x.categoria)}</td><td data-label="Gênero">${value(x.genero)}</td><td data-label="Bebida">${value(x.bebida)}</td><td class="guest-actions-cell" data-label="Ações"><button class="small-button quiet-button" type="button" data-action="edit-guest" data-id="${html(guestId)}" data-group-id="${html(id)}">Editar informações</button></td></tr>`;
       }).join("");
       const guestDetails = guests.length ? `<details class="guest-details"><summary class="guest-details-summary">Ver dados dos ${guests.length} convidados</summary><div class="guest-table-wrap"><table class="guest-table"><thead><tr><th>Nome cadastrado</th><th>Idade</th><th>Categoria</th><th>Gênero</th><th>Bebida</th><th>Ações</th></tr></thead><tbody>${guestRows}</tbody></table></div></details>` : `<p class="group-meta">Nenhum convidado cadastrado</p>`;
-      return `<article class="group-card"><header class="group-header"><div class="group-title"><h3>${html(groupName)}</h3><span class="status-badge ${active ? "" : "inactive"}">${active ? "Link ativo" : "Link inativo"}</span><p class="group-id">ID: ${html(id)}</p></div><div class="group-actions"><button class="small-button quiet-button" type="button" data-action="copy-link" data-id="${html(id)}" ${active ? "" : "disabled title=\"Ative o link antes de compartilhar\""}>Copiar link</button><button class="small-button primary-button" type="button" data-action="add-guest" data-id="${html(id)}" data-name="${html(groupName)}">Adicionar convidado</button><button class="small-button ${active ? "quiet-button" : "primary-button"}" type="button" data-action="${active ? "disable" : "enable"}" data-id="${html(id)}">${active ? "Desativar" : "Ativar"}</button><button class="small-button danger-button" type="button" data-action="delete" data-id="${html(id)}">Excluir grupo</button></div></header><div class="group-meta">Convidados <b>${guests.length}</b></div>${guestDetails}</article>`;
       return `<article class="group-card"><header class="group-header"><div class="group-title"><h3>${html(groupName)}</h3><span class="status-badge ${active ? "" : "inactive"}">${active ? "Link ativo" : "Link inativo"}</span><p class="group-id">ID: ${html(id)}</p></div><div class="group-actions"><button class="small-button quiet-button" type="button" data-action="preview-link" data-id="${html(id)}" data-name="${html(groupName)}" ${active ? "" : "disabled title=\"Ative o link antes de compartilhar\""}>Visualizar link</button><button class="small-button primary-button" type="button" data-action="add-guest" data-id="${html(id)}" data-name="${html(groupName)}">Adicionar convidado</button><button class="small-button ${active ? "quiet-button" : "primary-button"}" type="button" data-action="${active ? "disable" : "enable"}" data-id="${html(id)}">${active ? "Desativar" : "Ativar"}</button><button class="small-button danger-button" type="button" data-action="delete" data-id="${html(id)}">Excluir grupo</button></div></header><div class="group-meta">Convidados <b>${guests.length}</b></div>${guestDetails}</article>`;
     }).join("");
   }
@@ -340,22 +312,12 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     $("groups-list").innerHTML = '<div class="empty-state">Carregando famílias e convidados…</div>';
     loading(false);
     if (saved) {
-      state.email = saved; $("admin-email").value = saved; $("account-label").textContent = saved;
-      $("access-message").textContent = "Este navegador já lembra seu e-mail. Estamos verificando o acesso automaticamente.";
-      loadData().then(ok => {
-        if (!ok) {
-          showLogin(); $("admin-email").value = saved;
-          $("access-message").textContent = "Seu e-mail continua salvo. Tente novamente quando a conexão com o serviço estiver disponível, ou altere o e-mail se necessário.";
-          $("login-button").textContent = "Tentar acessar novamente";
-        }
       state.email = saved;
       notice("Conferindo o acesso salvo enquanto o painel abre…");
       loadData(true).then(ok => {
         if (!ok) notice("Não foi possível validar o acesso salvo. Verifique a conexão ou abra no navegador em que você já havia acessado.", true);
       });
     }
-    else showLogin();
-    $("login-form").addEventListener("submit", async e => { e.preventDefault(); state.email = $("admin-email").value.trim(); if (!state.email) return; if (await loadData()) rememberEmail(state.email); else state.email = rememberedEmail(); });
     else notice("Este navegador não tem uma sessão administrativa salva. Abra no navegador em que você já acessou o painel.", true);
     $("refresh-button").addEventListener("click", loadData);
     $("show-confirmed-button").addEventListener("click", showConfirmedGuests);
@@ -366,7 +328,6 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     $("groups-list").addEventListener("click", async e => {
       const btn = e.target.closest("button[data-action]"); if (!btn || state.busy) return;
       const { action, id } = btn.dataset;
-      if (action === "copy-link") { await copyInviteLink(id); return; }
       if (action === "preview-link") { showInvitePreview(id, btn.dataset.name); return; }
       if (action === "add-guest") {
         const form = $("guest-form");
@@ -434,6 +395,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     $("mobile-scrim").addEventListener("click", () => { $("sidebar").classList.remove("open"); $("mobile-scrim").hidden = true; });
   });
 })();
+
   </script>
 </head>
 <body>
@@ -448,6 +410,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       </nav>
       <div class="sidebar-bottom"><span class="private-label"><i></i> Acesso protegido pela API</span><p>As alterações são salvas no Google Sheets.</p></div>
     </aside>
+
     <main class="main-area" id="overview">
       <header class="topbar">
         <button class="menu-toggle" id="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
@@ -455,35 +418,28 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
         <span class="account-label" id="account-label">Verificando acesso…</span>
         <button class="quiet-button" id="refresh-button" type="button" hidden>Atualizar dados</button>
       </header>
+
       <div class="content-wrap">
         <section class="page-heading">
           <div><p class="eyebrow">Área administrativa</p><h1>Visão geral</h1><p class="heading-copy" id="event-summary">Acompanhe as confirmações e organize seus convidados.</p></div>
           <button class="primary-button" id="new-group-button" type="button" hidden><span aria-hidden="true">＋</span> Criar família</button>
         </section>
+
         <section class="notice" id="notice" role="status" aria-live="polite" hidden></section>
-        <section class="access-panel" id="access-panel" aria-labelledby="access-title">
-          <span class="access-symbol" aria-hidden="true">✦</span>
-          <p class="eyebrow">Acesso administrativo</p>
-          <h2 id="access-title">Entre com seu e-mail</h2>
-          <p id="access-message">Digite um e-mail ativo na aba Administradores. A API fará a verificação antes de carregar os dados.</p>
-          <form class="login-form" id="login-form">
-            <label for="admin-email">E-mail cadastrado</label>
-            <input id="admin-email" name="email" type="email" autocomplete="email" required maxlength="254" placeholder="nome@exemplo.com">
-            <button class="primary-button" id="login-button" type="submit">Acessar painel</button>
-          </form>
-        </section>
+
         <div id="admin-content" hidden>
           <section class="metrics" aria-label="Estatísticas dos convidados">
             <article class="metric"><span class="metric-label">GRUPOS</span><strong id="stat-groups">0</strong><span class="metric-foot">Famílias cadastradas</span></article>
             <article class="metric"><span class="metric-label">CONVIDADOS</span><strong id="stat-total">0</strong><span class="metric-foot">Na lista</span></article>
-            <article class="metric"><span class="metric-label">CONFIRMADOS</span><strong id="stat-confirmed">0</strong><span class="metric-foot">Presenças confirmadas</span></article>
             <article class="metric"><span class="metric-label">CONFIRMADOS</span><strong id="stat-confirmed">0</strong><button class="metric-link-button" id="show-confirmed-button" type="button">Ver quem confirmou</button></article>
             <article class="metric"><span class="metric-label">PENDENTES</span><strong id="stat-pending">0</strong><span class="metric-foot">Aguardando resposta</span></article>
             <article class="metric"><span class="metric-label">NÃO IRÃO</span><strong id="stat-declined">0</strong><span class="metric-foot">Respostas recebidas</span></article>
           </section>
+
           <section class="extra-stats" aria-label="Detalhes de convidados">
             <span><b id="stat-adults">0</b> adultos</span><span><b id="stat-children">0</b> crianças</span><span><b id="stat-men">0</b> homens</span><span><b id="stat-women">0</b> mulheres</span><span><b id="stat-drinks">0</b> com bebida</span>
           </section>
+
           <section class="groups-section" id="groups">
             <div class="section-heading"><div><p class="eyebrow">Lista de convidados</p><h2>Famílias e grupos</h2></div><label class="search-box"><span class="sr-only">Buscar família ou convidado</span><input id="search-input" type="search" placeholder="Buscar família" autocomplete="off"></label></div>
             <div id="groups-list" class="groups-list"></div>
@@ -499,6 +455,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
     </main>
   </div>
   <div class="mobile-scrim" id="mobile-scrim" hidden></div>
+
   <dialog class="modal" id="invite-dialog" aria-labelledby="invite-dialog-title">
     <div class="modal-form">
       <button class="modal-close" type="button" data-close="invite-dialog" aria-label="Fechar">×</button>
@@ -509,6 +466,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="invite-dialog">Fechar</button><a class="quiet-button" id="invite-open-link" href="#" target="_blank" rel="noopener noreferrer">Abrir prévia</a><button class="primary-button" id="invite-copy-button" type="button">Copiar link</button></div>
     </div>
   </dialog>
+
   <dialog class="modal" id="confirmed-dialog" aria-labelledby="confirmed-dialog-title">
     <div class="modal-form">
       <button class="modal-close" type="button" data-close="confirmed-dialog" aria-label="Fechar">×</button>
@@ -518,6 +476,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="confirmed-dialog">Fechar</button></div>
     </div>
   </dialog>
+
   <dialog class="modal" id="group-dialog" aria-labelledby="group-dialog-title">
     <form id="group-form" class="modal-form">
       <button class="modal-close" type="button" data-close="group-dialog" aria-label="Fechar">×</button>
@@ -527,6 +486,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
       <div class="modal-actions"><button class="quiet-button" type="button" data-close="group-dialog">Cancelar</button><button class="primary-button" type="submit">Criar família</button></div>
     </form>
   </dialog>
+
   <dialog class="modal" id="guest-dialog" aria-labelledby="guest-dialog-title">
     <form id="guest-form" class="modal-form">
       <button class="modal-close" type="button" data-close="guest-dialog" aria-label="Fechar">×</button>
@@ -547,3 +507,7 @@ button:disabled { opacity:.55; cursor:wait; }.primary-button:focus-visible,.quie
   </dialog>
 </body>
 </html>
+
+
+
+
